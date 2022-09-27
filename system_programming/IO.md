@@ -68,7 +68,14 @@ open file을 stream으로 모델링했고 모든 C 프로그램은 세 open stre
 - stdin (standard input에 대응 : descriptor0)
 - stdout (standard output에 대응 : descriptor1)
 - stderr (standard error에 대응 : descriptor2)
-
+## Reading File Metadata
+애플리케이션은 stat과 fstat 함수를 호출해서 파일에 대한 Metadata(데이터에 대한 데이터)를 얻는다   
+stat이란 struct 안에 Metadata가 들어있고 stat과 fstat함수는 이러한 stat을 채워서 리턴한다
+## Reading Directory Contents
+opendir 함수를 통해 DIR(directory stream) 포인터를 리턴    
+readdir 함수를 통해 DIR 포인터를 인풋으로 받아서  directory stream에서 다음 directory entry에 대한 포인터를 리턴   
+closedir 함수를 통해 stream을 닫음
+## Sharing Files
 
 
 
