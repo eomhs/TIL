@@ -69,15 +69,28 @@ open file을 stream으로 모델링했고 모든 C 프로그램은 세 open stre
 - stdout (standard output에 대응 : descriptor1)
 - stderr (standard error에 대응 : descriptor2)
 ## Reading File Metadata
-애플리케이션은 stat과 fstat 함수를 호출해서 파일에 대한 Metadata(데이터에 대한 데이터)를 얻는다   
-stat이란 struct 안에 Metadata가 들어있고 stat과 fstat함수는 이러한 stat을 채워서 리턴한다
+애플리케이션은 stat과 fstat 함수를 호출해서 파일에 대한 Metadata(데이터에 대한 데이터)를 얻음   
+lstat은 link가 가리키는 파일이 아닌 link 자체에 대한 Metadata를 얻음   
+**stat**이란 struct 안에 Metadata가 들어있고 stat과 fstat함수는 이러한 stat을 채워서 리턴
 ## Reading Directory Contents
 opendir 함수를 통해 DIR(directory stream) 포인터를 리턴    
-readdir 함수를 통해 DIR 포인터를 인풋으로 받아서  directory stream에서 다음 directory entry에 대한 포인터를 리턴   
+readdir 함수를 통해 DIR 포인터를 인풋으로 받아서  directory stream에서 다음 dirent(directory entry)에 대한 포인터를 리턴   
 closedir 함수를 통해 stream을 닫음
 ## Sharing Files
+커널은 open files를 관리하는데 세 가지 자료구조를 사용함
+- **Descriptor table** (one table per process)
+- **Open file table** (shared by all processes)
+- **v-node table** (shared by all processes)   
 
+Open file table이 달라도 같은 v-node table을 가리킴으로써 동일한 파일을 공유함 
+## I/O Redirection
+- **int dup(int oldfd)**
+    - oldfd가 가리키는 open file table을 가리키는 fd를 리턴 
+- **int dup2(int oldfd, int newfd)** 
+    - newfd가 가리키는 open file table이 oldfd가 가리키는 open file table과 같게 변경됨
+    - newfd가 원래 가리키는 open file table이 존재하면 먼저 close됨
 
+두 함수를 통해 I/O Redirection을 수행함
 
 
 
