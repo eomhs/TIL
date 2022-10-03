@@ -82,7 +82,9 @@ closedir 함수를 통해 stream을 닫음
 - **Open file table** (shared by all processes)
 - **v-node table** (shared by all processes)   
 
-Open file table이 달라도 같은 v-node table을 가리킴으로써 동일한 파일을 공유함 
+![](https://github.com/eomhs/TIL/blob/main/figures/Typical%20kernal%20data%20structures.PNG)   
+다음과 같이 Open file table이 달라도 같은 v-node table을 가리킴으로써 동일한 파일을 공유함   
+![](https://github.com/eomhs/TIL/blob/main/figures/File%20sharing.PNG)
 ## I/O Redirection
 - **int dup(int oldfd)**
     - oldfd가 가리키는 open file table을 가리키는 fd를 리턴 
@@ -90,7 +92,10 @@ Open file table이 달라도 같은 v-node table을 가리킴으로써 동일한
     - newfd가 가리키는 open file table이 oldfd가 가리키는 open file table과 같게 변경됨
     - newfd가 원래 가리키는 open file table이 존재하면 먼저 close됨
 
-두 함수를 통해 I/O Redirection을 수행함
+두 함수를 통해 I/O Redirection을 수행함   
+예를 들어 fd1이 A를 가리키고 있었고 fd4가 B를 가리키고 있었을 때   
+dup2(4, 1)를 실행한 결과는 다음과 같음   
+![](https://github.com/eomhs/TIL/blob/main/figures/after%20dup2.PNG)
 
 
 
