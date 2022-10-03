@@ -82,10 +82,11 @@ closedir 함수를 통해 stream을 닫음
 - **Open file table** (shared by all processes)
 - **v-node table** (shared by all processes)   
 
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Typical%20kernal%20data%20structures.PNG" width="100" height="50"/>          
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Typical%20kernal%20data%20structures.PNG" width="600" height="400"/>          
 
 다음과 같이 Open file table이 달라도 같은 v-node table을 가리킴으로써 동일한 파일을 공유함   
-![](https://github.com/eomhs/TIL/blob/main/figures/File%20sharing.PNG)
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/File%20sharing.PNG" width="600" height="400"/>
+
 ## I/O Redirection
 - **int dup(int oldfd)**
     - oldfd가 가리키는 open file table을 가리키는 fd를 리턴 
@@ -96,7 +97,7 @@ closedir 함수를 통해 stream을 닫음
 두 함수를 통해 I/O Redirection을 수행함   
 예를 들어 fd1이 A를 가리키고 있었고 fd4가 B를 가리키고 있었을 때   
 dup2(4, 1)를 실행한 결과는 다음과 같음   
-![](https://github.com/eomhs/TIL/blob/main/figures/after%20dup2.PNG)
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/after%20dup2.PNG" width="600" height="400"/>
 
 
 
