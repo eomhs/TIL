@@ -10,7 +10,7 @@
 Physical addressing   
 <img src = "https://github.com/eomhs/TIL/blob/main/figures/Physical%20addressing.PNG" width="600" height="400"/>   
 
-Virtual Adderessing
+Virtual Adderessing     
 <img src = "https://github.com/eomhs/TIL/blob/main/figures/Virtual%20addressing.PNG" width="600" height="400"/>   
 
 ## Dynamic Memory Allocation
