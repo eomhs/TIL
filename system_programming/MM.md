@@ -66,3 +66,27 @@ ex) 1-2, 3, 4, 5-8, 9-inf
 - Higher throughput
     - 2의 거듭제곱 사이즈 클래스들에 대해 로그 시간에 처리
 - First fit이 best fit 같은 효과를 가짐
+### Garbage Collection
+Heap allocated memory 중 더 이상 사용되지 않는 부분을 자동으로 해제하는 기법   
+가리키는 포인터가 없는 blocks는 사용되지 않는다고 할 수 있음   
+Classical GC 알고리즘에는 네 가지가 있음
+- Mark and sweep
+    - Root node에서 접근할 수 있는 blocks를 reachable하다고 표현
+    - Mark: malloc을 진행하다 남는 공간이 없을 때 root node에서 시작해 reachable한 모든 blocks의 head에 mark bit을 set함
+    - Sweep: 모든 blocks를 탐색해서 marked되지 않은 blocks를 free함
+    - 이러한 mark and sweep 도중에는 다른 프로세스들이 정지됨
+- Reference Counting
+    - 특징: 각 memory block은 이 block이 몇번 참조되는지 나와있는 reference count field가 있음
+    - 이러한 reference count가 0이 되면 free함
+    - Cyclic data structures에는 적용할 수 없음
+- Copying Algorithm
+    - 특징: Heap을 current data와 obsolete(쓸모없는) data의 두 semi spaces로 나눔
+    - malloc을 진행하다 남는 공간이 없을 때 이 두 영역이 바뀜
+    - 바뀐 후 obsolete data space에서 reachable block set을 current data space로 복사함
+    - Allocated/Free block lists가 필요 없음
+    - Internal fragmentation이 없음
+    - GC가 포인터 참조를 update해야 함
+- Generational Collectors
+    - 특징: Lifetime에 기반한 기법
+    - 대부분 allocations은 최근에 할당될수록 빨리 해제됨
+    - 따라서 최근에 allocated된 메모리들의 영역에 집중하여 수행함
