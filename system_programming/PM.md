@@ -70,3 +70,32 @@ Exception 발생 시 exception table의 해당하는 exception number에 있는 
 Exception은 다음의 네 가지 종류가 있음 
 
 <img src = "https://github.com/eomhs/TIL/blob/main/figures/Exception%20classes.PNG" width="600" height="200"/>
+
+## Signals
+Signal이란 process에게 시스템에서 어떤 이벤트가 일어났음을 알려주는 메세지임   
+Exception과 비슷하지만 higher-level software form임   
+보통 1-31의 integer로 표현됨   
+Signal에 대해 kernel은 **default action**을 정의해놓음
+-  terminate/core
+- ignore
+- stop / continue
+
+Process는 signal에 어떻게 반응할지 정할 수 있음
+- **catching** the signal (custom signal handler을 정의함)
+- **blocking** the signal (나중에 unblocked될때까지 받지 않음)
+- **ignoring** the signal
+- executing **default action** of the signal
+- 특정 signal은 catch, block, ignore이 불가능함 (SIGKILL, SIGSTOP)
+
+Signal은 kernel이나 request of a program에 의해 생성됨   
+
+Signal 전달과 받는 과정은 다음과 같음
+- Signal Delivery
+    - kernel은 process의 PCB의 internal signal state를 업데이트시켜 signal을 전달함
+- Pending Signals
+    - 전달되었으나 받지 않은 상태
+    - 최대 한개의 pending signal만 존재
+- Signal Reception
+    - 나중에, kernel은 signal state를 확인하고 선택된 action을 실행함
+
+Signal reception은 **asynchronous** to delivery : Signal은 context switch에서 return하기 전에 즉시 전달됨
