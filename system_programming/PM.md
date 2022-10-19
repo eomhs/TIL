@@ -99,3 +99,15 @@ Signal 전달과 받는 과정은 다음과 같음
     - 나중에, kernel은 signal state를 확인하고 선택된 action을 실행함
 
 Signal reception은 **asynchronous** to delivery : Signal은 context switch에서 return하기 전에 즉시 전달됨
+### Signal API
+- kill(pid_t pid, int sig)
+    - process에 signal을 보냄
+    - pid의 값에 따라 받는 process의 범위가 달라짐
+    - 실패시 <0의 integer을 리턴함
+- sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
+    - signal을 catch하게 signal handler을 등록하거나, ignore하거나 default action을 하게 등록함 
+    - 실패시 <0의 integer을 리턴함
+- signal(int signum, sighandler_t handler)
+    - sigaction과 유사하고 간단함
+    - 다만 UNIX 버전마다 약간 다른점이 존재해 현재는 사용하지 않는 함수
+    - 실패시 <0의 integer을 리턴함
