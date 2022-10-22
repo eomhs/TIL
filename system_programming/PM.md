@@ -111,3 +111,9 @@ Signal reception은 **asynchronous** to delivery : Signal은 context switch에�
     - sigaction과 유사하고 간단함
     - 다만 UNIX 버전마다 약간 다른점이 존재해 현재는 사용하지 않는 함수
     - 실패시 <0의 integer을 리턴함
+- sigprocmask(int how, const sigset_t *set, sigset_t *oldset)
+    - set에 있는 signal들을 block 하거나(SIG_BLOCK), unblock 하거나(SIG_UNBLOCK), blocked signal mask를 set으로 설정함(SIG_SETMASK)
+    - 실패시 <0의 integer을 리턴함
+- sigpending(sigset_t *set)
+    - pending된 모든 signal의 set을 리턴함
+    - 실패시 <0의 integer을 리턴함
