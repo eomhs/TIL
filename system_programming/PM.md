@@ -117,3 +117,49 @@ Signal reception은 **asynchronous** to delivery : Signal은 context switch에�
 - sigpending(sigset_t *set)
     - pending된 모든 signal의 set을 리턴함
     - 실패시 <0의 integer을 리턴함
+## Interprocess Communiacation
+Process는 independent할 수도 있고 다른 process와 cooperate할 수도 있음   
+Cooperating processes는 Interprocess communication (IPC)가 필요함   
+IPC에는 두 모델이 있음
+- **Message passing**
+    - data coherence와 race-freeness가 kernel에 의해 보장됨
+- **Shared memory**
+    - data coherence가 participating processes들이 책임을 가짐
+### Producer-Consumer Paradigm
+Paradigm for cooperating processes로, 공유하는 buffer (보통 bounded ring buffer)가 있어서 producer process는 정보를 생산하고 consumer process는 그 정보를 소비함
+### Message Passing
+Process들이 communicate하고 행동을 synchronize하는 메카니즘   
+IPC facility는 두 operation을 제공함
+- send(message)
+- receive(message)
+
+communicate하기 위해서는 우선 communication link를 만들고, send와 receive를 통해 message를 교환함   
+communication link의 구현은 physical (shared memory, hardware bus) 또는 logical (logical properties)   
+Communication에는 direct와 indirect의 방식이 있음
+- Direct Communication
+    - process는 다른 process의 이름을 명시적으로 적어야 함
+    - send(P, message), receive(Q, message) 등
+    - Each pair에는 정확히 하나의 link만 있고 보통 bi-directional
+- Indirect Communication
+    - message는 mailbox들에서 전달되어 process는 mailbox를 공유할 때만 communicate할 수 있음
+    - 각 mailbox는 unique한 id가 있음
+    - Each pair에는 여러 link들이 있을 수 있고 unidirectional 혹은 bi-directional
+
+Buffering이란 link에 붙은 queue of messages이고 세 가지 방식으로 구현됨:    
+Zero capacity (0 messages), Bounded capacity (finite length), Unbounded capacity (infinite length)   
+### Client-Server Communication
+Client-Server communication의 예로는 Pipes, Sockets, Remote Procedure Calls (Remote Method Invocation), all message-passing models가 있음   
+Pipe란 process들이 communicate하게 하는 관  
+Ordinary Pipes와 Named Pipes의 두 종류가 있음
+- Ordinary (Anonymous) Pipes
+    - unidirectional
+    - 만든 process 밖에서는 접근불가(parent-child 관계 필요)
+    - UNIX에서 pipe descriptor은 file descriptor임
+- Named Pipes
+    - file system에 살아있음
+    - bidirectional도 가능
+    - parent-child 관계 필요 없음
+    - persistent
+
+Socket이란 communication을 위한 endpoint   
+IP network socket과 local socket이 있음
