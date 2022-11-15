@@ -105,3 +105,33 @@ Terminology
 - Counting semaphore: used as a counter for set of available resources   
 
 Semaphore은 Progress Graph에 unsafe region을 감싸는 forbidden region을 생성해 trajectory가 들어가는 것을 막음
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Semaphore%20mutex.PNG" width="600" height="400"/>    
+
+### Synchronization
+Shared resources에 대한 접근을 schedule 하기 위해 semaphore을 사용함   
+Basic idea: Thread는 semaphore operation을 이용해 다른 thread에게 어떤 조건이 참이 되었음을 알림   
+Two classic examples:
+- Producer-Consumer Problem
+    - Prethreaded Concurrent Server가 이에 해당(Client가 Producer, worker threads가 Consumer)
+- Readers-Writers Problem
+
+Thread에서 호출된 함수는 thread-safe 여야 함   
+함수가 thread-safe하다는 것은 여러 concurrent thread로부터 호출되었을 때 항상 올바른 결과를 생성함을 의미   
+**Classes of thread-unsafe functions**
+- Class 1: shared variables을 보호하지 않는 함수
+    - Fix: semaphore operation을 이용해 shared variable을 조작하는 부분을 보호함
+    - Issue: synchronization operation이 속도를 저하함
+- Class 2: 여러 호출에서 state를 유지하는 함수
+    - Fix: state를 argument로 전달함
+- Class 3: static variable에 대한 포인터를 리턴하는 함수
+    - Fix 1: caller가 결과를 저장할 variable의 address를 전달하게 함수를 rewrite
+    - Fix 2: Lock-and-copy
+- Class 4: 위의 thread-unsafe한 함수를 호출하는 함수
+    - Fix 1: thread-unsafe한 함수를 thread-safe한 함수로 변경
+    - Fix 2: call site와 resulting shared data를 mutex로 보호함(calle가 Class 1이나 3인 경우)
+
+함수가 reentrant하다는 것은 여러 thread에 의해 호출될 때 shared variable에 대한 접근이 없다는 것을 의미   
+Thread-safe functions 안에 reentrant functions가 있음   
+Class 2의 함수를 thread safe로 만드는 유일한 방법은 reentrant로 만드는 것임   
+standard C library의 모든 함수는 thread-safe   
+대부분의 Unix system call은 thread-safe이나, 몇몇 예외가 있고 이는 reentrant version(_r)을 사용하면 됨
