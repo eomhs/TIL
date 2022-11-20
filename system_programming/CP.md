@@ -1,5 +1,5 @@
 # Concurrent Programming
-Concurrent program이란 programs with more than a single flow of control
+Concurrent program이란 programs with more than a single flow of control   
 Operating system level의 concurrency 개념과는 다름   
 **Data parallelism**과 **Task parallelism**에 유용함
 - Data parallelism
