@@ -58,6 +58,17 @@ IP address는 network byte order로 저장됨(big-endian)
 Addressing: colon (:)으로 나뉘어진 8개의 hexadectet(16bit)로 표현된 128-bit addresses   
 ex) 2001:067c:10ec:0254::0216   
 연속된 0은 double colon (::)으로 대체함
-
+## Internet Domain Names
+Internet은 DNS (domain name system)을 통해 IP address와 domain name 간의 mapping을 유지함   
+Domain name의 set은 hierarchy를 구성하고, 가장 오른쪽의 label은 top-level domain (TLD)임   
+TLD에는 generic TLD (gTLD)와 country-code TLD (ccTLD)가 있음   
+각 domain은 최소 두개의 지정된 name server가 있음   
+이러한 name server들이 domain에 대한 original DNS data를 가지고 있음   
+각 host는 항상 127.0.0.1의 address를 가지는 localhost라는 locally defined domain name을 가지고 있음   
+여러 mapping 방법이 있음
+- Domain name과 IP address가 1대1 대응
+- 여러 domain names가 같은 IP address로 대응
+- 여러 domain names가 여러 IP address로 대응
+- 유효한 domain name이지만 대응되는 IP address가 없음
 
 
