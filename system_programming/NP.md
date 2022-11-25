@@ -70,5 +70,53 @@ TLD에는 generic TLD (gTLD)와 country-code TLD (ccTLD)가 있음
 - 여러 domain names가 같은 IP address로 대응
 - 여러 domain names가 여러 IP address로 대응
 - 유효한 domain name이지만 대응되는 IP address가 없음
+## Clients, Servers, and Sockets
+- **Clients**
+    - ex) Web browsers, ftp, telnet, ssh
+    - client는 server socket address에 있는 IP address를 통해 host를 식별함
+    - server socket address에 있는 port를 통해 service를 식별함
+- **Servers**
+    - Servers는 long-running processes임(machine을 server라고 부르기도 함)
+    - 각 server는 port에 request가 오기까지 기다림
+    - ex) Web server, FTP server, Telnet server, Mail server
+- **Sockets**
+    - Socket이란 kernel에게는 endpoint of communication
+    - application에게는 network와 read/write를 할 수 있게 해주는 file descriptor
+    - network communication을 위해 사용되는 basic unit
+    - Sockets interface는 network를 위한 user-level interface를 제공함
+## The Sockets Interface
+Overview는 다음과 같음   
+
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Sockets%20interface.PNG" width="600" height="400"/>
 
 
+- getaddrinfo(node, service, hints, res)
+    - addrinfo struct의 list를 리턴함
+    - node는 remote node, service는 port를 의미
+    - hints는 IP version이나 TCP/UDP 등을 설정하기 위해 사용
+    - res는 리턴한 list의 첫번째 addrinfo struct를 가리키는 포인터
+- socket(domain, type, protocol)
+    - file descriptor (endpoint for communication)을 리턴함
+    - domain은 protocol family (UNIX, IPv4/6, Netlink, ...)을 의미
+    - type은 communication semantics를 의미 (connection-oriented, reliable streams, unreliable connection-less streams 등)
+    - protocol은 보통 0이지만 domain/type이 한 개 이상의 protocol을 지원하면 0보다 클 수 있음
+- bind(sockfd, addr, addrlen)
+    - server socket을 위해 사용
+    - open socket에 network interface/port를 할당
+    - addr에 다양한 size의 sockaddr struct 형태로 정보가 제공되어 addrlen 또한 주어져야함
+- listen(sockfd, backlog)
+    - socket을 passive socket으로 mark함(들어오는 connection을 accept()로 받을 준비가 됨)
+    - backlog는 얼마나 많은 pending connections를 socket이 지원하는지 명시함
+- accept(sockfd, addr, addrlen)
+    - 들어오는 connection을 기다림
+    - connection client에 대한 정보가 addr로 리턴됨
+- connect(sockfd, addr, addrlen)
+    - addr에 의해 식별된 server로 향하는 socket과 connection을 시작함
+ 
+Connect / Accept 는 다음과 같이 이루어짐   
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Connect%20accept.PNG" width="600" height="300"/>
+
+Listening descriptor는 한번 생성되고 server가 살아있는 동안 계속 존재함   
+Connected descriptor는 server가 client의 connection request를 accept하면 생성되고 service client가 종료하면 사라짐   
+이러한 차이는 concurrent server를 가능하게 함
+ 
