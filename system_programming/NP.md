@@ -119,4 +119,78 @@ Connect / Accept 는 다음과 같이 이루어짐
 Listening descriptor는 한번 생성되고 server가 살아있는 동안 계속 존재함   
 Connected descriptor는 server가 client의 connection request를 accept하면 생성되고 service client가 종료하면 사라짐   
 이러한 차이는 concurrent server를 가능하게 함
+## Web Servers
+Web client와 server는 HTTP (hypertext transfer protocol)을 통해 통신함   
+Web server은 client에게 MIME (multipurpose Internet mail extensions) type의 일련의 bytes인 content를 리턴함   
+MIME type의 예시
+- text/html
+- text/plain
+- application/postscript
+- image/gif
+- image/jpeg
+
+HTTP response에 의해 리턴된 content는 static하거나 dynamic함
+- Static content: file에 저장된 content
+    - ex) HTML files, images, audio clips
+- Dynamic content: request 후 즉석에서 생성된 content
+    - ex) client 대신에 server에서 프로그램이 실행되어 생성된 content
+
+URL (Universal Resource Locator)도 static content와 dynamic content에 따라 형태가 다름
+- URLs for static content
+    - `https://csap.snu.ac.kr:443/sysprog/index.html`
+    - ` https://csap.snu.ac.kr/sysprog/`
+    - port 번호가 명시되지 않았으면 80(http) 또는 443(https) 사용
+- URLs for dynamic content
+    - ` https://csap.snu.ac.kr/sysprog/add.php?a=2022&b=1522
+`
+    - ? 뒤에 부분은 argument임
+
+위의 URL for dynamic content 예시에서,   
+client는 prefix (`https://csap.snu.ac.kr`)를 통해 다음을 알 수 있음
+- 어떤 종류의 server와 contact하는지 (Web server)
+- server가 어디 있는지 (csap.snu.ac.kr)
+- 몇번 port를 사용하는지 (https -> 443) 
+
+server는 suffix (`/sysprog/add.php`)를 통해 다음을 알 수 있음
+- request가 static content를 요청하는지 dynamic content를 요청하는지
+- file system에서 file의 위치 (처음 '`/`'는 home directory를 의미)
+
+### HTTP Requests
+HTTP request는 0개 이상의 request header가 뒤따르는 request line임   
+Request line: \<method> \<uri> \<version>
+- \<version>은 HTTP version (HTTP/1.0 또는 HTTP/1.1)
+- \<uri>는 보통 서버를 위한 URL suffix (URL 전체가 아님)
+- \<method>는 GET, POST, OPTIONS, HEAD, PUT, DELETE, TRACE 중 하나
+
+Request header: \<header name> \<header data>   
+- server에 추가적인 정보 제공
+### HTTP Responses
+HTTP response는 0개 이상의 response header가 뒤따르는 response line임   
+Response line: \<version> \<status code> \<status msg>
+- \<version>은 HTTP version
+- \<status code>는 numeric status
+- \<status msg>는 해당하는 영어 text
+    - 200 OK: Request가 error 없이 처리됨
+    - 301 Moved: 대체 URL을 제공함
+    - 403 Forbidden: Server가 file에 접근할 수 있는 권한이 없음
+    - 404 Not found: Server가 file을 찾을 수 없음
+
+Response header: \<header name>: \<header data>
+- response에 대한 추가적인 정보를 제공
+- Content-Type: response body의 content의 MIME type
+- Content-Length: response body의 content의 길이(byte)
+### HTTP Versions
+- HTTP/1.0
+    - 각 transaction마다 새로운 connection
+- HTTP/1.1
+    - persistent connection을 지원해 같은 connection에서 여러 transaction
+    - Host header 의무화
+        - Host: csap.snu.ac.kr
+    - chunked encoding 지원
+        - Transfer-Encoding: chunked
+- HTTP/2.0
+    - 여러 변화가 있지만, 가장 큰 변화는 text protocol에서 binary protocol로 변함
+- HTTP/3.0
+    - 여러 변화가 있지만, 가장 큰 변화는 protocol이 TCP에서 UDP로 변함
+
  
