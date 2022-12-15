@@ -5,7 +5,6 @@
 - [Process Management](https://github.com/eomhs/TIL/blob/main/system_programming/PM.md)
 - [Concurrent Programming](https://github.com/eomhs/TIL/blob/main/system_programming/CP.md)
 - [Network Programming](https://github.com/eomhs/TIL/blob/main/system_programming/NP.md)
-- The Runtime Environment
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - LINUX 명령어
