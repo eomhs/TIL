@@ -6,10 +6,19 @@
 - [Concurrent Programming](https://github.com/eomhs/TIL/blob/main/system_programming/CP.md)
 - [Network Programming](https://github.com/eomhs/TIL/blob/main/system_programming/NP.md)
 ## 운영체제
+- [Kernels and Processes](https://github.com/eomhs/TIL/blob/main/operating_system/KP.md)
+- Concurrency
+- Memory Management
+- Persistent Storage
 ## 데이터베이스
+- [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
+- Database Design
+- Storage Management And Indexing
+- Query Processing
+- Transaction Management
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
-- LINUX 명령어
+- [LINUX 명령어](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Command.md)
 - [GNU Make](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/GNU%20Make.md)
 - [Vim](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Vim.md)
 - [GDB](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/GDB.md)
