@@ -38,7 +38,7 @@ Hardware support: kernel이 protect를 잘 하고 user code가 processor에서 �
 - Timer
 - Safe way to switch mode
 
-***Privileged instructions***:   
+### Privileged instructions:   
 kernel mode에서 쓸 수 있는 instructions   
 Ex)
 - privilege level 변경
@@ -47,8 +47,41 @@ Ex)
 
 user program이 privileged instruction을 실행하려 할 시 exception 발생 및 kernel에 의해 handling (주로 process 중단) 
 
-***Limits on memory accesses***   
+### Limits on memory accesses
 simple memory protection: base and bounds 그러나 많은 문제 발생   
 따라서 Virtual Addresses를 사용
+
+### Hardware Timer
+user process가 무한루프 등으로 계속 실행되면 kernel이 다시 control을 가져와야 함  
+이런 경우 Hardware device가 Interrupt를 통해 kernel handler에 control을 돌려줌   
+Interrupt는 kernel에 의해 frequency가 정해지고 일시적으로 미뤄질 수도 있음
+
+### Mode Switch
+user mode에서 kernel mode로 변경되는 원인
+- Interrupts
+- Exceptions
+- System calls
+
+kernel mode에서 user mode로 변경되는 원인   
+- 새로운 process나 thread가 시작됨
+- Interrupt, Exception, System call에서 리턴함
+- Context switch
+- User-level upcall (UNIX signal)
+
+Interrupts를 안전하게 처리하기 위한 방법은 다음과 같음
+- Interrupt vector table을 통해 Limited entry로 kernel에 접근
+- Atomic transfer of control (PC, SP 등이 모두 변하거나 모두 변하지 않거나)
+- Transparent re-startable execution (User program은 interrupt가 처리되고 다시 그 지점에서 실행돼서 일어났는지 모름)   
+
+Interrupt Vector Table   
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Interruptp%20Vector%20Table.PNG" width="600" height="400"/>
+
+Interrupted process의 state는 Interrupt Stack에 저장됨   
+Interrupt Stack
+- kernel memory에 위치 (user process의 stack은 신뢰할 수 없기 때문)
+- process/thread는 보통 kernel stack과 user stack 둘 다 보유
+- kernel을 위해서는 per-processor interrupt stack
+
+
 
 
