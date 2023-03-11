@@ -82,6 +82,15 @@ Interrupt Stack
 - process/thread는 보통 kernel stack과 user stack 둘 다 보유
 - kernel을 위해서는 per-processor interrupt stack
 
+Interrupt Masking
+- Interrupt handler는 실행중일때 interrupt를 받지 않음
+    - Non-blocking
+- OS kernel도 interrupt를 미룰 수 있음
+
+Interrupt handler의 실행이 끝나면 
+- Interrupt Stack에 저장된 레지스터 값들을 복원함
+- Atomically하게 interrupted process/thread로 return함
+    - PC, SP 복원, user mode로 switch
 
 
 
