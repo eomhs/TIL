@@ -44,3 +44,8 @@ Relational Algebra의 operand는 relation이고 operator는 다음의 종류들�
     - 이때 중복된 row는 없앰
 - ∪ (Union): 합집합이고 두 relation은 schema가 같아야 함
 - ㅡ (Set Difference): 차집합이고 두 relation은 schema가 같아야 함 
+- x (Cartesian-Product)
+- ρ (Rename): relation의 이름을 변경함
+- ∩ (Set-Intersection): 교집합이고 두 relation은 schema가 같아야 함
+- ⋈ (Natural-Join): 두 relation을 합치고 겹치는 attribute가 같은 row들을 가져옴
+- ← (Assignment): 일시적인 relation variable처럼 사용
