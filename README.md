@@ -18,6 +18,7 @@
 - Transaction Management
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
+- [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
 - [LINUX 명령어](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Command.md)
 - [GNU Make](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/GNU%20Make.md)
 - [Vim](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Vim.md)
