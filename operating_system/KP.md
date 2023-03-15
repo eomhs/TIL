@@ -91,6 +91,17 @@ Interrupt handler의 실행이 끝나면
 - Interrupt Stack에 저장된 레지스터 값들을 복원함
 - Atomically하게 interrupted process/thread로 return함
     - PC, SP 복원, user mode로 switch
+## The Programming Interface
+System call은 다음의 주요 세 가지 목적이 있음
+- User space를 위한 추상화된 interface 제공
+- Security
+- Process에게 virtualized system을 제공
 
-
-
+OS가 제공하는 Programming Interface는 다음의 종류가 있음
+- <U>Process management</U>
+- <U>I/O</U>
+- Thread management
+- Memory management
+- File systems and storage
+- <U>Communicating between processes</U>
+- Authentication and security
