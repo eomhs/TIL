@@ -3,8 +3,8 @@
 Data란 기록할 가치가 있는 formal description  
 Database란 integrated collection of persistent data   
 Physical data independence에 의해 pysical level의 추상화는 알지 않아도 schema 수정 가능   
-- ***Schema***: database의 논리적 구조
-- ***Instance***: 특정 시간에 database의 실제 content
+- **Schema**: database의 논리적 구조
+- **Instance**: 특정 시간에 database의 실제 content
 
 Database Languages
 - Data Definition Language (DDL)
@@ -49,3 +49,36 @@ Relational Algebra의 operand는 relation이고 operator는 다음의 종류들�
 - ∩ (Set-Intersection): 교집합이고 두 relation은 schema가 같아야 함
 - ⋈ (Natural-Join): 두 relation을 합치고 겹치는 attribute가 같은 row들을 가져옴
 - ← (Assignment): 일시적인 relation variable처럼 사용
+
+## SQL
+Structured Query Language의 줄임말  
+Table 생성 문법은 **create table** r (A1 D1, A2 D2, ...)  
+ex) create table instructor(  
+ 　　   ID  　　char(5),  
+  　　  name 　varchar(20) not null,  
+   　　 salary 　numeric(8,2),  
+   　　 primary key(ID))  
+Domain types에는 다음의 종류 등이 있음
+- char(n)
+- varchar(n)
+- int
+- numeric(p, d)  
+
+Create table에서 integrity constraints에는 다음의 종류가 있음
+- not null
+- primary key(A1, ...)
+- foreign key(Am, ...)
+
+Table r을 삭제하거나 attribute를 수정하려면
+- drop table r
+- alter table r add A D
+    - A는 attribute의 이름이고 D는 domain
+- alter table r drop A
+
+SQL query는 다음의 형태를 가짐  
+　　**select** A1, A2, ...  
+　　**from** r1, r2, ...  
+　　**where** P  
+기본적으로 query result로 중복을 허용함   
+중복을 제거하려면 **select** 뒤에 **distinct**를 추가  
+또한 **select**절은 연산을 허용함
