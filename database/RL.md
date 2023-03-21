@@ -81,4 +81,43 @@ SQL query는 다음의 형태를 가짐
 　　**where** P  
 기본적으로 query result로 중복을 허용함   
 중복을 제거하려면 **select** 뒤에 **distinct**를 추가  
-또한 **select**절은 연산을 허용함
+또한 **select**절은 연산을 허용함  
+
+**as**를 통해 rename 가능
+- ex)select column from table **as** T
+
+String operation중 % 기호는 pattern matching에 쓰이며 substring을 의미
+- ex) select * from course where title **like** '%data%'
+- title에 data라는 substring이 포함된 tuple들을 받아옴
+
+**order by**를 통해 오름차순(default) 또는 내림차순(desc)으로 tuple 정렬  
+- ex) select * from instructor **order by** name **desc**
+
+Set Operation도 사용가능
+- union, intersect, except
+- ex) (select name from instructor) **union** (select name from student)
+
+Tuple들은 null value를 가질 수 있음  
+- unknown으로 취급됨
+- **is null**을 통해 null인지 검사 가능
+- ex) select name from instructor where salary **is null**
+- null과 연산을 하면 null임
+- Aggregate function은 null을 무시함
+
+Aggregate Functions
+- avg: 평균값
+- min: 최솟값
+- max: 최댓값
+- sum: 값들의 합
+- count: 값들의 수
+- ex) select count(*) from teaches
+
+**group by**를 통해 같은 attribute를 가진 집단끼리 묶을 수 있음
+- ex) select dept_name, avg(salary) from instructor **group by** dept_name **having** avg(salary) > 50000
+- group by로 묶이지 않은 attribute는 aggregate function을 써야만 select절에 사용가능
+- **having**을 통해 조건 설정
+
+Query 안에 subquery 사용가능  
+주로 set membership, set comparison, set cardinalityd에 사용됨
+- where A **in (not in)** <subquery\>
+- where A > **some (all)** <subquery\>
