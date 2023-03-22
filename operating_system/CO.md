@@ -43,3 +43,28 @@ Linux는 tasks를 사용해서 process와 thread를 표현함
     - Syscall 없이 thread operations 사용
 
 구현에서 how는 mechanism이고 what은 policy이며 이 둘을 구분해야 함
+### Thread Context Switch
+현재 실행중인 thread를 멈추고 다른 thread를 실행시킴   
+현재 실행중인 thread의 register를 그 thread의 TCB와 stack에 저장하고 새 thread의 register를 그 thread의 TCB와 stack에서 복구함
+Trigger는 두 종류가 있음
+- Voluntary
+    - Tread_yield
+    - Thread_join (child가 이미 끝났으면 일어나지 않음)
+- Involuntary
+    - Interrupt or processor exception
+    - 높은 우선순위를 가진 다른 thread
+### Implementing User-Level Threads without Kernel Support
+- Green threads (early Java)
+- Preemptive user-level threads
+### Implementing User-Level Threads with Kernel Support
+- Per-processor Kernel Threads
+    - user-level thread를 kernel thread 위에 다중화
+    - user-level library는 host machine의 각 processor마다 하나의 kernel thread를 생성
+    - 각 kernel thread는 parallel하게 user-level schedular을 실행
+- Schedular Activations
+### Alternative Abstractions
+- Asynchronous I/O와 event-driven programming
+    - event-driven: 어떤 event가 발생했을 때 동작을 변경하는 방식
+    - state가 계속 유지됨 (context switch가 없어서 TCB도 없음)
+    - state 저장/복구를 application이 명시적으로 해야함 (thread system은 자동)
+- Data parallel programming
