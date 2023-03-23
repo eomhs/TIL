@@ -68,3 +68,4 @@ Trigger는 두 종류가 있음
     - state가 계속 유지됨 (context switch가 없어서 TCB도 없음)
     - state 저장/복구를 application이 명시적으로 해야함 (thread system은 자동)
 - Data parallel programming
+## Synchronizing Access to Shared Objects
