@@ -68,4 +68,30 @@ Trigger는 두 종류가 있음
     - state가 계속 유지됨 (context switch가 없어서 TCB도 없음)
     - state 저장/복구를 application이 명시적으로 해야함 (thread system은 자동)
 - Data parallel programming
-## Synchronizing Access to Shared Objects
+## Synchronizing Access to Shared Objects 
+Synchronization이 필요한 이유(Sequential하게 짜는게 어려운 이유)는 다음과 같음
+- 프로그램 실행의 결과가 thread의 실행 순서에 따라 달라짐
+- 프로그램 실행이 non-deterministic할 수 있음
+    - Heisenbugs: 디버깅하려고 하면 없어지는 버그
+- 컴파일러나 프로세서가 instruction의 순서를 바꿀 수 있음
+
+Too much milk 문제에서 correctness property는 다음과 같음
+- safety (mutual exclusion): 안전 영역을 벗어나지 말아야함
+- liveness (progress): 결국 목적에 도달해야함
+### Implementing Shared Objects
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Shared%20layers.PNG" width="600" height="500"/>
+
+### Locks
+Lock이란 mutual exclusion을 제공하는 synchronization variable  
+BUSY와 FREE 상태가 있음
+- Lock::aquire: lock이 FREE일때까지 기다렸다가 BUSY상태로 만들고 가져감
+- Lock::release: lock을 FREE 상태로 만듬
+
+Lock의 Formal Properties
+- Mutual Exclusion: 최대 한개의 thread가 lock을 유지함
+- Progress: 결국 어떤 thread가 acquire에 성공함
+- Bounded waiting: lock을 얻기 위한 waiting은 유한함
+### Bounded Buffer (Producer-Consumer)
+size가 N이고 0... N-1 까지 접근한 뒤 다시 0으로 돌아오는 buffer  
+Critical section에 lock을 걸어서 최대 한개의 thread만 접근하게 해야함  
+Critical section이란 atomically하게 shared data에 접근이 필요한 code의 부분 

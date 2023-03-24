@@ -7,7 +7,7 @@
 - [Network Programming](https://github.com/eomhs/TIL/blob/main/system_programming/NP.md)
 ## 운영체제
 - [Kernels and Processes](https://github.com/eomhs/TIL/blob/main/operating_system/KP.md)
-- Concurrency
+- [Concurrency](https://github.com/eomhs/TIL/blob/main/operating_system/CO.md)
 - Memory Management
 - Persistent Storage
 ## 데이터베이스
