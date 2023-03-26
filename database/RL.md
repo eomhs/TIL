@@ -118,6 +118,24 @@ Aggregate Functions
 - **having**을 통해 조건 설정
 
 Query 안에 subquery 사용가능  
-주로 set membership, set comparison, set cardinalityd에 사용됨
+주로 set membership, set comparison, set cardinality에 사용됨
 - where A **in (not in)** <subquery\>
 - where A > **some (all)** <subquery\>
+- where **exists (not exists)** <subquery\>
+
+From 절에도 subquery 사용가능  
+Select 이외에 DML로는 delete, insert, update가 있음  
+
+Deletion은 다음의 형태를 가짐  
+　　**delete from** table [where clause]  
+ex) **delete from** course where dept_name = 'Appl.Math'  
+
+Insertion은 다음의 형태를 가짐   
+　　**insert into** table **values** (values)  
+　　**insert into** table <select subquery\>  
+ex1) **insert into** course **values** ('CS-437', 'Database Systems', 4)  
+ex2) **insert into** table1 select * from table1  
+
+Update는 다음의 형태를 가짐  
+　　**update** table **set** <assignment_statements\> [where clause]  
+ex) **update** instructor **set** salary = salary * 1.05 where salary < (select avg(salary) from instructor)  
