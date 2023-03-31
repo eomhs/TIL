@@ -91,7 +91,55 @@ Lock의 Formal Properties
 - Mutual Exclusion: 최대 한개의 thread가 lock을 유지함
 - Progress: 결국 어떤 thread가 acquire에 성공함
 - Bounded waiting: lock을 얻기 위한 waiting은 유한함
+
+Lock의 단점
+- expensive (blocking)
+- deadlock이 일어날 수 있음
 ### Bounded Buffer (Producer-Consumer)
 size가 N이고 0... N-1 까지 접근한 뒤 다시 0으로 돌아오는 buffer  
 Critical section에 lock을 걸어서 최대 한개의 thread만 접근하게 해야함  
-Critical section이란 atomically하게 shared data에 접근이 필요한 code의 부분 
+Critical section이란 atomically하게 shared data에 접근이 필요한 code의 부분   
+Producer는 생성하고 Consumer는 소모함  
+### Readers-Writers problem
+reader는 shared data를 읽지만 수정하지는 않는 thread  
+writer는 shared data를 수정하는 thread  
+reader는 한번에 여러 thread가 읽어도 되지만 writer는 하나만 활성화 가능  
+### Condition Variables
+Condition variable이란 Thread가 lock에 의해 보호받는 shared state에 일어난 변화를 효율적으로 기다리게 하는 synchronization object  
+다음의 세 함수가 있음
+- wait(Lock* lock)
+    - atomically하게 lock을 release하고 processor을 반납
+- signal()
+    - condition variable의 waiting list에 있는 한 thread를 선택해 깨움(ready list에 넣음)
+    - waiting list가 비어있으면 아무 일도 일어나지 않음 (memoryless)
+- broadcast()
+    - waiting list의 모든 thread를 깨움
+
+
+위의 함수들을 호출할 때 항상 lock을 가지고 있어야 함  
+wait는 무조건 **while** 안에 있어야 함  
+Signal의 처리 방식에는 두 가지가 있음
+- Mesa (위의 signal 함수에서 설명한 방식)
+- Hoare
+    - Signal은 waiter에게 lock과 processor을 줌
+    - Waiter는 다시 실행됨
+    - Waiter가 끝나면 lock과 processor가 signaler에게 돌아옴
+
+### Semaphores
+Semaphore란 non-negative integer value를 가진 synchronization variable  
+- 무조건 초기화를 해줘야함
+- P(): atomically하게 value > 0 을 기다리고 , 1 감소시킴
+- V(): atomically하게 value를 1 증가시킴
+
+Condition Variable과 Semaphore의 차이점
+- Semaphore는 sticky함
+    - memory가 있어서 P를 부르지 않았어도 V를 부르면 value가 증가
+- Condition variable은 memoryless
+    - wait하지 않았으면 signal해도 아무일도 일어나지 않음
+
+### Monitors
+Concurrent programming과 object-oriented programming이 접합되며 생김  
+monitor procedures를 가진 객체와 한 thread만 활성화 될 수 있음  
+ex) synchronized keyword in Java
+
+
