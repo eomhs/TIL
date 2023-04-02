@@ -139,3 +139,34 @@ ex2) **insert into** table1 select * from table1
 Update는 다음의 형태를 가짐  
 　　**update** table **set** <assignment_statements\> [where clause]  
 ex) **update** instructor **set** salary = salary * 1.05 where salary < (select avg(salary) from instructor)  
+
+## Intermediate SQL
+Join의 type과 Condition은 다음 그림과 같음  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Join%20types.PNG" width="600" height="300"/>  
+주로 from절에 쓰이고, table1 [natural] join table2 [on/using]과 같이 사용  
+
+Integrity Constraints에는 다음의 종류들이 있음
+- not null
+- unique
+    - ex) unique(ID)
+- primary key
+- check(P)
+    - ex) check(semester in ('Spring', 'Summer', 'Fall', 'Winter'))
+- Referential integrity
+    - references 키워드, foreign key
+    - on delete cascade, on delete set null, on delete set default 사용가능
+
+Authorization을 주는 grant문은 다음과 같은 형식임  
+　　**grant** <privilege list\>  
+　　**on** <relation name or view name\>  
+　　**to** <user list\>  
+반대로 authorization을 뺏는 revoke문은   
+　　**revoke** <privilege list\>  
+　　**on** <relation name or view name\>  
+　　**from** <user list\>  
+Role이란 user들의 group과 privileges를 표현하기 위한 것으로 다음과 같이 생성함  
+　　**create role** grader  
+Privilege를 role에게 grant할 수 있고, role을 user나 다른 role에게 grant 할 수 있음
+- grant select on student to grader
+- grant grader to Kim
+- grant grader to prof
