@@ -142,4 +142,47 @@ Concurrent programming과 object-oriented programming이 접합되며 생김
 monitor procedures를 가진 객체와 한 thread만 활성화 될 수 있음  
 ex) synchronized keyword in Java
 
+### Implementing Locks
+- Version 1: Disable interrupts
+    - 장점: 간단함
+    - 단점: disable_interrupt와 enable_interrupt는 privileged instruction이라 user program이 사용할 수 없음,   
+    다른 interrupt도 못받아 긴 critical section에서는 사용 불가능
+- Version 2: Software-based locks (Peterson's algorithm)
+    - 장점: 하드웨어를 별로 요구하지 않음
+    - 단점: 어렵고 instruction reordering이 일어나면 결과가 달라질 수 있음 (Memory barrier을 사용하면 방지할 수 있으나 expensive)
+- Version 3: Hardware Instructions
+    - test_and_set을 통해 하드웨어가 atomically하게 지원
+    - 단점: spin-wait이라 CPU cycle 낭비
+- Version 4: Sleep Locks
+    - queue를 이용해서 lock을 얻을 수 없으면 wait하고 yield하게 함
+    - 단점: Higher overhead, state 관리
+
+### Concurrency Errors
+- Deadlock
+- Race 
+    - Data race
+        - ex) cnt++ (cnt가 여러 thread의 shared data일 때)
+    - Atomicity bugs
+        - ex) 조건을 확인했는데 다음 instruction 전에 다른 thread로 넘어감
+    - Order bugs
+        - ex) 다른 thread에서 선언하기 전에 먼저 참조하는 경우
+
+## Multi-Object Synchronization
+multi-object synchronization에 명확한 답은 없음  
+trade-off와 non-modular  
+multiprocessor lock은 performance가 안좋음
+- Lock contention: 하나의 lock만 가질 수 있기 때문
+- False sharing
+
+Cache coherence란 system이 data의 copy가 하나만 있는 것처럼 행동하는 것  
+Lock contention을 줄이기 위한 방법에는 다음의 네 가지가 있음
+- Fine-grained locking
+    - lock이 있는 hash table
+    - subset으로 나눠서 각각이 own lock을 가짐
+    - hash bucket 하나당 lock 하나
+    - 다만 object의 complexity 증가
+    - 구현: object 수가 증가하면 hash bucket의 수도 증가하므로 *resize* operation 이용
+- Per-processor data structures 
+- Ownership desing pattern
+- Staged architecture
 
