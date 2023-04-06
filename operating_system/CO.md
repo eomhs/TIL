@@ -183,6 +183,35 @@ Lock contention을 줄이기 위한 방법에는 다음의 네 가지가 있음
     - 다만 object의 complexity 증가
     - 구현: object 수가 증가하면 hash bucket의 수도 증가하므로 *resize* operation 이용
 - Per-processor data structures 
+    - processor 하나당 하나의 hash table
 - Ownership desing pattern
+    - thread가 container에서 object를 제거하고 lock 없이 접근함
 - Staged architecture
+    - System을 stage라 불리는 여러 subsystem으로 나눔
+    - 각 stage는 stage에 private한 state를 포함하고 그 state에서 작동하는 한개 이상의 thread를 가짐
 
+### Lock Contention
+위의 방법들을 사용해도 lock이 여전히 busy할 수 있음  
+다음의 두 방법이 better할 수 있음
+- MCS Locks
+- RCU (read-copy-update)
+- 둘 다 Linux kernel에 쓰이고, atomic한 read-modify-write instruction에 의존함  
+
+test_and_set (spinlock)의 경우 많은 processor가 lock을 얻으려고 하면 sequential하기 때문에 시간이 오래 걸림  
+MCS lock
+- 각 waiting thread에 spin할 수 있는 separate memory location을 할당
+- lock을 waiting하는 list가 있고 front가 lock을 가지고 tail이 마지막 thread
+- CompareAndSwap
+    - memory word의 value를 확인해서
+    - 바뀌었으면 false를 리턴
+    - 바뀌지 않았으면 new value로 바꾸고 true를 리턴
+
+Read-Copy-Update  
+- 목표: shared data에 대한 매우 빠른 read
+    - read는 lock이 필요 없음
+    - write는 조금 느려도 괜찮음
+- 제한된 update
+    - writer는 new version의 data structure을 만듬
+    - new version을 atomic memory write로 publish함
+- Reader는 old version 혹은 new version을 볼 수 있음
+- 모든 reader가 grace period를 지나면 old version을 garbage collect함
