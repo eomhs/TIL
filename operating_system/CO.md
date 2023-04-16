@@ -260,3 +260,57 @@ Banker's algorithm
 Deadlock은 희귀하기 때문에 방지하지 않고 일어났을 때 복구하는 식으로 overhead를 줄이기도 함  
 - 그 자원 없이 진행
 - Rollback하고 다시 실행
+
+## Scheduling
+Resource의 type
+- Preemptible: OS가 resource를 가져갈 수 있음
+- Non-preemptible: OS가 가져갈 수 없고 자발적으로 반납하는걸 기다림
+### Basic Scheduling Algorithms
+First-Come, First-Served (FCFS)  
+- 가장 간단한 scheduling algorithm
+- Non-preemptive
+- FIFO
+- 장점: 간단함
+- 단점: 도착 순서에 waiting time이 의존함
+
+Shortest Job First (SJF)
+- 가장 짧은 수행 시간 순서대로 schedule
+- 수행 시간이 같으면 FIFO
+- 장점: 평균 wait time을 최소화 (preemption이 허용되지 않으면 아마 최적)
+- 단점: 수행 시간을 예측하기 어려움, starve할 수 있음
+
+Shortest Remaining Time First (SRTF)
+- 새 process의 수행 시간이 현재 process의 남은 수행 시간보다 짧다면 새 process를 schedule (preemption이 허용되는 SJF)
+- 장점: 평균 waiting time을 줄임 (아마 최적)
+
+Round-Robin (RR)
+- Time-sharing을 지원하는 practical approach
+- Time slice만큼 process를 수행하고 남은 부분을 FIFO queue의 끝에 넣음
+- 항상 FIFO보다 좋다고 할 수는 없음
+- 장점
+    - Interactivity가 좋음
+    - Process간 CPU의 fair allocation
+    - 수행시간이 매우 넓게 분포하면 평균 대기 시간이 짧음
+- 단점
+    - 수행시간이 비슷하면 평균 대기 시간이 나쁨 (FIFO 보다도)
+    - Time slice에 performance가 의존함: 너무 높으면 FCFS와 같아짐, 너무 낮으면 context switch가 너무 많아짐
+
+다만 Round-Robin이 항상 fair한건 아님  
+ ex) 짧은 I/O bound와 긴 CPU bound workload가 섞여 있는 경우  
+
+Max-Min Fairness
+- Equal share보다 적은 resource를 원하는 task가 있으면 그만큼 먼저 schedule함
+- 남은 time을 max-min으로 나눔
+- 다른 task들이 모두 equal share 이상을 원하면 equal share만큼 나눔
+
+모든 상황에 맞는 scheduler는 없음 (workload와 environment가 다르기 때문)
+
+Multi-level Feedback Queue (MFQ)
+- ready queue가 여러 queue로 나뉘어짐
+- 각 queue는 각각 scheduling algorithm을 가짐 (RR, FCFS 등)
+- queue들 사이에 schedule을 위한 scheduling algorithm을 골라야 함
+- 각 queue는 priority가 있고 Aging (priority 높임) 과 Monopolizing resources (priority 낮춤)을 통해 조정
+
+### Real-time Scheduling
+- Hard real time: 실제로 정해진 시간 안에 task를 수행해야함
+- Soft real time: 중요한 process가 다른 process보다 priority가 높아야 함 (Linux)
