@@ -215,3 +215,48 @@ Read-Copy-Update
     - new version을 atomic memory write로 publish함
 - Reader는 old version 혹은 new version을 볼 수 있음
 - 모든 reader가 grace period를 지나면 old version을 garbage collect함
+
+### Multi-Object Atomicity
+A->subtract(100)   
+B->add(100)  
+처럼 여러 object에 대한 operations가 다른 threads에게 atomic해야 하는 경우가 있음  
+이를 위해 다음의 방법들이 있음
+- Careful class design
+    - 다만 한계가 있어서 multiple locks가 필요
+- Acquire-All/Release-All
+    - Request들이 들어왔을 때 동시에 acquire할 수 있는 모든 lock을 aquire하고 동시에 release
+    - Request를 처리하기 전에 어떤 lock을 필요로 하는지 아는게 어려움
+- Two-Phase Locking
+    - Request를 처리하기 전에 acquire하는 것이 아니라 operation이 필요로 할 때 lock을 acquire함
+    - 다만 operation이 아닌 request가 끝날 때 release함
+
+### Deadlock
+Resource: thread가 작업을 수행하기 위해 필요한 어떤 것  
+Starvation: thead가 영원히 기다릴 수 있음
+Deadlock: resources를 circular하게 기다림  
+
+Deadlock의 필요조건
+- 한정된 resources
+- No preemption
+    - thread가 권한을 자발적으로 놓기 전에 뺏을 수 없음
+- 자원을 가진 채로 waiting
+- Circular waiting
+    - 각 thread가 다른 thread가 가진 자원을  원형으로 기다림
+
+Deadlock을 방지하는 법
+- Explit or limit behavior
+    - 위의 네 조건을 없앰
+- Detect and recover
+
+Resource allocation graph를 통해 deadlock과 potential deadlock을 detect  
+- lock과 thread를 node
+- owned by와 wait for을 edge
+- cycle이 있으면 deadlock
+- lock order만 봤을 때 cycle이 있으면 potential deadlock
+
+Banker's algorithm
+- 예시 참조
+
+Deadlock은 희귀하기 때문에 방지하지 않고 일어났을 때 복구하는 식으로 overhead를 줄이기도 함  
+- 그 자원 없이 진행
+- Rollback하고 다시 실행
