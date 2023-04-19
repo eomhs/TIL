@@ -314,3 +314,44 @@ Multi-level Feedback Queue (MFQ)
 ### Real-time Scheduling
 - Hard real time: 실제로 정해진 시간 안에 task를 수행해야함
 - Soft real time: 중요한 process가 다른 process보다 priority가 높아야 함 (Linux)
+
+Priority는 statically하게 할당될 수 있으나 starvation의 문제가 생길 수 있고, OS가 dynamically하게 바꿀 수도 있음  
+
+Priority Inversion  
+- 높은 priority가 낮은 priority에 의존하는 현상
+- ex) P1 (low) lock, P2 (high) lock, P3 (medium) while(...){}
+- P3가 끝나야 P1이 lock을 풀고 P2가 lock을 얻으므로 priority inversion
+- Waiting process의 가장 높은 priority를 잠깐 상속하는 priority inheritance로 해결 
+- 위의 예시의 경우 P1에게 high priority를 상속
+
+Hard Real-time Scheduling  
+- Deadline 안에 수행되는걸 보장함
+- 일정한 간격으로 CPU를 요구하는 process를 periodic하다고 함
+
+Rate Monotonic Scheduling
+- Periodic process들에게 적용가능함
+- Burst length에 관계없이 주기가 짧을수록 높은 priority를 가짐
+- Optimal static scheduling policy임
+- 다만 CPU 이용률이 한계를 넘으면 deadline 안에 수행을 보장하지 못함
+
+Earliest Deadline Fisrt Scheduling (EDF)
+- Deadline이 빠를수록 높은 priority를 가짐
+- Dynamic priorities (process의 priority가 시간에 따라 바뀜)
+
+### Multiprocessor Scheduling
+Shared-memory Multiprocessor 환경  
+
+Global queue of processes
+- 모든 CPU가 공유하는 ready queue를 사용
+- 장점: CPU 사용률이 높음, 모든 process에게 fair함
+- 단점: scalable하지 않음, cache가 느려짐(poor locality)
+
+Per-CPU queue of processes
+- CPU들에게 processes를 static partition함
+- 장점: 구현하기 쉬움, scalable
+- 단점: 각 CPU마다 process 수가 다를 수 있음 (Load-imbalance), 따라서 CPU 사용률이 낮아지고 fair하지 않음
+
+Per-Processor Affinity Scheduling
+- 각 processor가 ready list를 가짐
+- Thread를 thread가 가장 최근에 수행됐던 ready list의 마지막에 넣음
+- 쉬는 processor가 다른 processor로부터 대기중인 process를 가져올 수 있음
