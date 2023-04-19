@@ -142,7 +142,7 @@ ex) **update** instructor **set** salary = salary * 1.05 where salary < (select 
 
 ## Intermediate SQL
 Join의 type과 Condition은 다음 그림과 같음  
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Join%20types.PNG" width="600" height="300"/>  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Join%20types.PNG" width="600" height="200"/>  
 주로 from절에 쓰이고, table1 [natural] join table2 [on/using]과 같이 사용  
 
 Integrity Constraints에는 다음의 종류들이 있음

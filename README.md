@@ -12,7 +12,7 @@
 - Persistent Storage
 ## 데이터베이스
 - [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
-- Database Design
+- [Database Design](https://github.com/eomhs/TIL/blob/main/database/DD.md)
 - Storage Management And Indexing
 - Query Processing
 - Transaction Management
