@@ -72,3 +72,45 @@ Conceptual design을 Logical design으로 바꾸는 법
     - 연관된 entity sets의 primary key와 relationship set의 attributes를 가짐
     - 다만 one-to-many나 one-to-one의 경우 별도의 table을 만들지 않고 한 table의 primary key와 relationship set의 attributes를 다른 table에 추가하면 됨
 - Generalization/Specialization은 상위 레벨과 하위 레벨을 각각 table로 만들거나 상위 레벨의 attributes를 하위 레벨에 포함시킴
+
+## Relational DB Design
+중복이 있는 design은 다음의 문제들을 야기함
+- Insertion anomaly 
+- Deletion anomaly 
+- Update anomaly: single record를 update해도 중복되는 모든 record를 같이 update 해야함
+
+따라서 이러한 경우 schema를 decompose 해야함 
+
+First Normal Form
+- 모든 attributes의 domain이 atomic한 경우임
+- 모든 relation이 first normal form이라고 가정함
+
+특정한 relation R이 good form인지 판단하고, 아닌 경우 good forms로 decompose하는걸 relational theory라고 함  
+Functional dependancies에 기반함  
+
+Functional Dependencies
+- A, B가 R의 attribute 일 때
+- A -> B 의 필요충분조건은 다음과 같음
+- 모든 legal relations r(R)에 대해
+- 어느 tuple t1과 t2에 대해서도
+- t1[A] = t2[A] => t1[B] = t2[B]
+- 즉 A에 의해 B가 결정되는 경우(A가 같으면 B도 무조건 같음)
+
+FD set F에 의해 유도될 수 있는 모든 FD를 closure of F라고 함  
+Amstrong's Axioms에 의해 closure를 구할 수 있음
+- B ⊆ A 이면 A -> B
+- A -> B 이면 CA -> CB
+- A -> B 이고 B -> C 이면 A -> C
+
+Boyce-Codd Normal Form (BCNF)
+- BCNF이면 good form
+- Key가 아닌 FD가 없는 경우
+- Relation schema R에서 Closure of F가 모두 다음 중 하나를 만족하는 경우
+    - A -> B가 trivial
+    - A가 R의 superkey
+
+Loseless-join Decomposition
+- 정보의 손실이 없는 decomposition
+- r(R)을 {R1, R2} 로 decompose 했을 때
+- r = πR1(r) ⋈ πR2(r) 인 경우
+- R1 ∩ R2 -> R1 또는 R1 ∩ R2 -> R2 인 경우
