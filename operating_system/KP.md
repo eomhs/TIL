@@ -74,7 +74,7 @@ Interrupts를 안전하게 처리하기 위한 방법은 다음과 같음
 - Transparent re-startable execution (User program은 interrupt가 처리되고 다시 그 지점에서 실행돼서 일어났는지 모름)   
 
 Interrupt Vector Table   
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Interruptp%20Vector%20Table.PNG" width="600" height="400"/>
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Interrupt%20Vector%20Table.PNG" width="600" height="400"/>
 
 Interrupted process의 state는 Interrupt Stack에 저장됨   
 Interrupt Stack
