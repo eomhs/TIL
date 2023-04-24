@@ -109,8 +109,23 @@ Boyce-Codd Normal Form (BCNF)
     - A -> B가 trivial
     - A가 R의 superkey
 
-Loseless-join Decomposition
+Lossless-join Decomposition
 - 정보의 손실이 없는 decomposition
 - r(R)을 {R1, R2} 로 decompose 했을 때
 - r = πR1(r) ⋈ πR2(r) 인 경우
-- R1 ∩ R2 -> R1 또는 R1 ∩ R2 -> R2 인 경우
+- R1 ∩ R2 -> R1 또는 R1 ∩ R2 -> R2 인 경우 (공통된 attribute가 최소한 둘 중 하나의 key인 경우)
+
+Dependancy Preservation
+- Decomposition 하기 전의 FD 보존
+- R을 R1, R2, ... , Rn 으로 decompose 했을 때
+- F의 closure가 F1, F2, ... , Fn의 합집합의 closure과 같은 경우
+- 이를 통해 Join 하지 않고 원래 FD들을 알 수 있음
+- ex) R = (A, B, C), F = { A -> B, B -> C }
+- ex) R1 = (A, B), R2 = (B, C) : lossless join & dependancy preservation 
+- ex) R1 = (A, B), R2 = (A, C) : lossless join & not dependancy preservation
+
+디자인 목표
+- Lossless join decomposition와
+- Dependancy preservation을 통해 (가능하다면: 불가능한 경우도 있음) 
+- BCNF로 만든다
+
