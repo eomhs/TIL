@@ -129,3 +129,14 @@ Dependancy Preservation
 - Dependancy preservation을 통해 (가능하다면: 불가능한 경우도 있음) 
 - BCNF로 만든다
 
+Attribute set에 의해 functional dependencies를 가지는 attribute set을 closure of attribute sets라고 함  
+Attribute closure을 이용해 다음을 할 수 있음
+- Superkey 테스트: 해당 attribute set의 closure가 R인지 확인
+- Functional dependencies 테스트: A -> B인지 확인하려면 B가 A의 closure 안에 있는지 확인
+- F의 closure 계산: R의 모든 부분집합 attribute set에 대해 closure을 구함
+- A -> B가 BCNF 조건을 위배하는지 확인: A의 closure가 R인지 확인
+
+
+R이 BCNF인지 확인하려면 F의 closure가 아닌 F에 대해서만 확인해도 됨  
+그러나 R의 decomposition들에 대해 BCNF를 확인할 때는 closure of F를 사용해야 함  
+
