@@ -232,7 +232,7 @@ B->add(100)
 
 ### Deadlock
 Resource: thread가 작업을 수행하기 위해 필요한 어떤 것  
-Starvation: thead가 영원히 기다릴 수 있음
+Starvation: thead가 영원히 기다릴 수 있음  
 Deadlock: resources를 circular하게 기다림  
 
 Deadlock의 필요조건
