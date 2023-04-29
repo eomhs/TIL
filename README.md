@@ -13,7 +13,7 @@
 ## 데이터베이스
 - [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
 - [Database Design](https://github.com/eomhs/TIL/blob/main/database/DD.md)
-- Storage Management And Indexing
+- [Storage Management And Indexing](https://github.com/eomhs/TIL/blob/main/database/SMI.md)
 - Query Processing
 - Transaction Management
 ## UNIX, LINUX, GNU 툴체인
