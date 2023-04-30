@@ -33,3 +33,17 @@ Disk-Block Access 최적화
 - File organization: 관련된 data들을 disk의 비슷한 위치에 저장함
 - Nonvolatile write buffers: Main memory에서 disk로 block을 write하는 overhead가 크므로 우선 non-volatile RAM buffer에 write함
 - Log disk: Log는 보통 write만 하면 되므로 따로 log disk에 write하면 seek time이 필요 없어 매우 빠름
+
+RAID (Redundant Arrays of Independent Disks)
+- 여러개의 disk를 이용해 high capacity, high speed, high reliability를 얻는 방법
+- Redundancy를 이용해 두 개의 disk에 동일한 정보를 저장하는 mirroring과, 한 disk의 parity bit를 다른 disk에 저장하는 방법으로 reliability를 올림
+- Parallelism을 이용해 Block-level striping을 통해 여러 disk에 block들을 나누어 저장하여 performance를 올림
+
+RAID Levels
+- Level 0: Block striping, non-redundant
+    - Reliability가 낮아서 data 손실이 있어도 괜찮은 경우에 쓰임
+- Level 1: Mirrored disks (with block striping)
+    - DBMS에서 log file을 저장하는데 주로 쓰임
+- Level 5: Block-interleaved distributed parity
+    - Parity를 한 disk에 몰아서 저장하는 것이 아닌 그림과 같이 저장함
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/RAID5.PNG" width="400" height="200"/>  
