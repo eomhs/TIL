@@ -46,4 +46,4 @@ RAID Levels
     - DBMS에서 log file을 저장하는데 주로 쓰임
 - Level 5: Block-interleaved distributed parity
     - Parity를 한 disk에 몰아서 저장하는 것이 아닌 그림과 같이 저장함
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/RAID5.PNG" width="400" height="200"/>  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/RAID5.PNG" width="500" height="300"/>  
