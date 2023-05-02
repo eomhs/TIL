@@ -65,7 +65,7 @@ Variable length record
     - 고정된 길이의 attribute는 대신 그냥 값이 나타남
 
 
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Variable%20Length%20Record.PNG" width="600" height="200"/>  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Variable%20Length%20%20Record.png" width="600" height="200"/>  
 
 Variable length record는 주로 **Slotted page structure**을 통해 저장됨  
 - Page header가 다음을 포함
