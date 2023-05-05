@@ -8,7 +8,7 @@
 ## 운영체제
 - [Kernels and Processes](https://github.com/eomhs/TIL/blob/main/operating_system/KP.md)
 - [Concurrency](https://github.com/eomhs/TIL/blob/main/operating_system/CO.md)
-- Memory Management
+- [Memory Management](https://github.com/eomhs/TIL/blob/main/operating_system/MM.md)
 - Persistent Storage
 ## 데이터베이스
 - [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
