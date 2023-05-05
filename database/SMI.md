@@ -46,4 +46,36 @@ RAID Levels
     - DBMS에서 log file을 저장하는데 주로 쓰임
 - Level 5: Block-interleaved distributed parity
     - Parity를 한 disk에 몰아서 저장하는 것이 아닌 그림과 같이 저장함
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/RAID5.PNG" width="400" height="200"/>  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/RAID5.PNG" width="500" height="300"/>  
+
+## Data Storage Structures
+### File organization
+Database는 file들로 저장됨  
+각 file은 sequence of records  
+각 record는 sequence of fields  
+Record type에는 fixed-length와 variable-length가 있음  
+Fixed length record
+- Record size가 정해져 있다고 가정함
+- 각 file은 하나의 type의 record들만 가지고 있음
+
+Variable length record
+- Attributes가 순서대로 저장됨
+- Attributes의 길이가 다양함
+    - record의 첫 부분에 (offset, length)로 각 attribute를 나타냄
+    - 고정된 길이의 attribute는 대신 그냥 값이 나타남
+
+
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Variable%20Length%20%20Record.png" width="600" height="200"/>  
+
+Variable length record는 주로 **Slotted page structure**을 통해 저장됨  
+- Page header가 다음을 포함
+    - Record entity의 수
+    - Block의 free space의 끝을 가리키는 포인터
+    - 각 record의 위치와 크기
+- Header와 record들 사이에 free space가 있음(record가 끝부분부터 앞부분으로 추가됨)
+
+### Storage Access
+CPU가 disk에 있는 data 처리를 하기 위해서는 main memory로 옮겨야 함  
+Buffer: Disk block의 copy를 저장하기 위한 main memory의 일부  
+Buffer manager: main memory에 buffer을 allocating하는 subsystem  
+OS는 보통 buffer replacement에 LRU를 사용하지만 DBMS는 mixed strategy 사용(data block의 access pattern 등을 이용)
