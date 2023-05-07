@@ -79,3 +79,50 @@ CPU가 disk에 있는 data 처리를 하기 위해서는 main memory로 옮겨�
 Buffer: Disk block의 copy를 저장하기 위한 main memory의 일부  
 Buffer manager: main memory에 buffer을 allocating하는 subsystem  
 OS는 보통 buffer replacement에 LRU를 사용하지만 DBMS는 mixed strategy 사용(data block의 access pattern 등을 이용)
+
+## Indexing
+기본 개념
+- Search key: file에서 record를 찾기 위해 사용되는 attribute
+- Index file: search key와 해당하는 pointer들로 이루어진 file
+- Ordered indices: search key들이 sorted order로 저장됨
+- Hash indices: seach key들이 hash로 저장됨
+
+Index 성능 평가 기준
+- 지원되는 access type
+    - point queries, range queries
+- Time
+    - access, insertion, deletion
+
+Ordered Indices
+- **Primary index**
+    - Search key가 file을 sequential order로 가리킴
+    - 주로 primary key로 이용되지만 필수는 아님
+- **Secondary index**
+    - Search key가 file을 not sequential order로 가리킴
+- **Index-sequential file**
+    - Primary index가 있는 ordered sequential file
+
+Dense index: file의 모든 search key-value에 대한 index가 있음  
+Sparse index: file의 몇몇 search key-value에 대해서만 index가 있음 (Index sequential인 경우에만 가능)    
+Multilevel Index
+- Outer index: primary index를 가리키는 sparse index
+- Inner index: primary index
+
+**B+ Tree**
+- 정의
+    - root에서 leaf node로 가는 모든 path의 길이가 같음
+    - Tree는 at least half full
+- Node 구조
+    - Root
+        - 최소 2명의 children
+    - Typical node
+        - P (pointer)와 K (search key value)로 이루어짐
+        - Search key value와 K의 크기를 비교해 P를 구하고 이를 통해 다음 level로 감
+    - Leaf node
+        - 마지막 P가 다음 leaf node를 가리킴
+        - Search key value와 일치하는 Ki가 있으면 Pi가 그 record를 가리킴
+- Level
+    - File에 K개의 search key가 있으면 높이는 $log_{n/2}K$를 넘지 않음
+
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/B+Tree.png" width="700" height="500"/>
+
