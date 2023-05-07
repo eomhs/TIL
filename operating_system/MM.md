@@ -30,7 +30,7 @@ Memory Management Unit (MMU)를 통해 virtual address를 physical address로 �
     - Context switch를 위해 Process ID tag가 있음
 
 전체적인 구조는 다음과 같음  
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Memory%20management.PNG" width="600" height="400"/>
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Memory%20management.PNG" width="700" height="500"/>
 
 ## Caching and Virtual Memory
 Cache란 original data보다 접근이 빠른 copy of data  
