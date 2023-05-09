@@ -126,3 +126,16 @@ Multilevel Index
 
 <img src = "https://github.com/eomhs/TIL/blob/main/figures/B+Tree.png" width="700" height="500"/>
 
+- Insertion
+    - Search key를 통해 leaf node를 search함
+    - 이미 search key value가 leaf node에 있으면 그 파일에 record를 추가함 (필요하면 bucket으로 가는 pointer 추가)
+    - Search key value가 없으면
+        - Main file에 record 추가
+        - Leaf node에 공간이 있으면 추가하고 없으면 **split**함
+        - Split이란 원래 node의 크기를 n/2 만큼 남기고 나머지와 새 record로 new node를 만듦
+- Deletion
+    - Search key를 통해 leaf node를 search함
+    - 그 record를 main file에서 제거함
+    - Leaf node가 n/2보다 entry가 적어지면 **merge** 하거나 **redistribute**함
+    - Merge는 근처 node로 남은 entry가 모두 들어갈 수 있는 경우
+    - Redistribute는 근처 node가 많이 차있어 그럴 수 없는 경우
