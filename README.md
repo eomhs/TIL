@@ -14,7 +14,7 @@
 - [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
 - [Database Design](https://github.com/eomhs/TIL/blob/main/database/DD.md)
 - [Storage Management And Indexing](https://github.com/eomhs/TIL/blob/main/database/SMI.md)
-- Query Processing
+- [Query Processing](https://github.com/eomhs/TIL/blob/main/database/QP.md)
 - Transaction Management
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
