@@ -124,7 +124,7 @@ Multilevel Index
 - Level
     - File에 K개의 search key가 있으면 높이는 $log_{n/2}K$를 넘지 않음
 
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/B+Tree.png" width="700" height="500"/>
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/B+Tree.PNG" width="700" height="500"/>
 
 - Insertion
     - Search key를 통해 leaf node를 search함
