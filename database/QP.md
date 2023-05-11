@@ -10,7 +10,7 @@ Query processing의 단계
 Query plan  
 Evaluation primitive: 어떻게 평가할지 annotation이 달린 relational algebra  
 **Query evaluation plan**: 일련의 primitive operations  
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Query%20plan.png" width="600" height="300"/>    
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Query%20plan.PNG" width="600" height="300"/>    
       
 Query Optimization
 1. 논리적으로 동일한 expressions를 생성
