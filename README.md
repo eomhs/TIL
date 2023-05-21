@@ -15,7 +15,7 @@
 - [Database Design](https://github.com/eomhs/TIL/blob/main/database/DD.md)
 - [Storage Management And Indexing](https://github.com/eomhs/TIL/blob/main/database/SMI.md)
 - [Query Processing](https://github.com/eomhs/TIL/blob/main/database/QP.md)
-- Transaction Management
+- [Transaction Management](https://github.com/eomhs/TIL/blob/main/database/TM.md)
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
