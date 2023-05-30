@@ -49,3 +49,54 @@ Cascadeless Schedule
 - T1이 commit할 때까지 read를 미룸
 - 따라서 recoverable함
 - 지키는 것이 권장됨
+
+## Concurrency Control
+Isolation의 구현   
+Lock-Based Protocol
+- exclusive (X) mode: read와 write 가능 (lock-X)
+- shared (S) mode: read만 가능 (lock-S)
+- Lock을 쓴다고 항상 serializability를 보장하는 것은 아님
+
+Two-Phase Locking Protocol (2PL)
+- Phase 1: Growing Phase
+    - Transaction이 lock을 얻기만 하고 release하지 않는 단계
+    - lock-S 또는 lock-X를 얻거나 lock-S를 lock-X로 upgrade
+- Phase 2: Shrinking Phase
+    - Transaction이 lock을 release하는 단계
+    - lock-S 또는 lock-X를 release하거나 lock-X를 lock-S로 downgrade
+- Serializability를 보장하나 deadlock이나 cascading rollback이 발생할 수 있음
+
+Strict/Rigorous 2PL
+- Strict 2PL
+    - Transaction이 commit/abort할 때까지 exclusive lock을 release하지 않음
+- Rigorous 2PL
+    - Transaction이 commit/abort할 때까지 모든 lock을 release하지 않음
+
+## Recovery System
+Atomicity와 Durability의 구현  
+Shadow database scheme
+- 한번에 하나의 transaction만 active라 가정
+- db_pointer가 현재 database의 copy를 가리킴
+- Transaction이 작업 전에는 원래 database를 가리키다 partially commit이고 disk로 flush되면 바뀐 database를 가리킴 
+- 매우 비효율적 (transaction마다 database 전체를 copy)
+
+Failure 종류
+- Transaction failure
+- System crash
+- Disk failure
+- Fail-stop 가정: System crash가 일어나도 non-volatile storage는 오염되지 않는다고 가정 
+
+Storage 구조
+- Volatile storage
+    - System crash가 일어나면 정보가 모두 날아감
+    - main memory, cache memory
+- Non-volatile storage
+    - System crash에도 정보 유지
+    - disk tape, flash memory
+- Stable storage
+    - 모든 failure 종류에도 살아남는 이론적인 storage
+    - 여러 non-volatile storage들을 이용해 근사
+
+Data Access    
+
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Data%20access.PNG" width="600" height="400"/>  
