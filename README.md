@@ -9,7 +9,7 @@
 - [Kernels and Processes](https://github.com/eomhs/TIL/blob/main/operating_system/KP.md)
 - [Concurrency](https://github.com/eomhs/TIL/blob/main/operating_system/CO.md)
 - [Memory Management](https://github.com/eomhs/TIL/blob/main/operating_system/MM.md)
-- Persistent Storage
+- [Persistent Storage](https://github.com/eomhs/TIL/blob/main/operating_system/PS.md)
 ## 데이터베이스
 - [Relational Languages](https://github.com/eomhs/TIL/blob/main/database/RL.md)
 - [Database Design](https://github.com/eomhs/TIL/blob/main/database/DD.md)
