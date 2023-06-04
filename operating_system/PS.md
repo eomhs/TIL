@@ -88,7 +88,7 @@ Ext2
 - File creation시 세 dirty block이 생김
     - inode bitmap (B), 새 file에 대한 inode (I), parent directory data block (D)
 
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Software%20layers.PNG" width="600" height="200"/>
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Software%20layers.PNG" width="600" height="300"/>
 
 B, I, D에 crash가 생기면 문제가 발생할 수 있어 해결해야 함  
 - fsck
