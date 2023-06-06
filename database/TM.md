@@ -100,3 +100,41 @@ Storage 구조
 Data Access    
 
 <img src = "https://github.com/eomhs/TIL/blob/main/figures/Data%20access.PNG" width="600" height="400"/>  
+
+Recovery 알고리즘
+- 두 가지 파트로 나뉘어짐
+- 첫번째로 normal transaction동안 log를 기록
+- 두번쨰로 failure 이후 log를 통해 복구
+
+**Log-Based Recovery**
+- Log란 일련의 log records
+- Log records
+    - Transaction이 시작할 때: \<T start>
+    - T가 X에 write 하기 전: \<T, X, V1, V2>
+    - T의 마지막 statement가 끝날 때: \<T commit>
+    - T가 roll back하고 끝날 때: \<T abort>
+- Undo(T): T의 마지막 log record로부터 돌아가며 old value로 update
+- Redo(T): T의 처음 log record부터 시작해서 old value로 update
+- Checkpoint
+    - Log를 처음부터 끝까지 searching하는것은 비효율적이기에 도입됨
+    - 현재 main memory에 있는 모든 log record를 stable storage에 output하고
+    - 수정된 모든 buffer block들을 disk에 output하고
+    - \<checkpoint L> log record 작성 
+
+Concurrent transactions에 대한 recovery
+- \<checkpoint L>형태의, checkpoint 당시 active한 transactiont list 기록
+- Redo phase
+    - 마지막 checkpoint의 L을 undo-list에 넣음
+    - 앞으로 가며 redo함
+    - 새로 start한 trasaction이 있으면 undo-list에 넣음
+    - abort하거나 commit한 transaction이 있으면 undo-list에서 제거
+- Undo phase
+    - Log를 마지막에서 시작해 뒤로 가며
+    - undo-list에 있는 transaction에 대한 log record를 undo
+    - 해당 \<T start>를 만나면 \<T abort>를 log에 기록하고 undo-list에서 제거
+    - undo-list가 비면 종료
+
+Write-Ahead Logging
+- Log record는 생성된 순서대로 stable storage에 output됨
+- T는 \<T commit>이 stable storage에 output된 이후에 commit state로 바뀜
+- Block of data가 disk로 output되기 전에 그 data들에 대한 log records가 먼저 stable storage로 output 되어야 함
