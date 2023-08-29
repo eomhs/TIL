@@ -24,3 +24,19 @@ var arr2 = arrayOf(1, 2, 3, 4, 5)
 2차원 배열
 - 하나의 값으로 초기화하는 경우 다음의 방법을 사용함
 - ex) `var arr = Array(n, {Array(m, {0})})`
+### 스택, 힙  
+java.util.Stack, java.util.Queue 라이브러리 필요  
+스택
+- ex) `var s = Stack<Int>()`  
+
+큐
+- ex) `var q: Queue<Int> = LinkedList<>()`
+
+### 해시
+- 제네릭 안에 각각 key와 value의 타입 선언  
+- ex) `var h = HashMap<String, Int>()`
+
+### 힙
+- PriorityQueue 
+- compareBy를 통해 우선순위의 기준 설정
+- ex) `var pq = PriorityQueue<Int>(compareBy {it[0]})`
