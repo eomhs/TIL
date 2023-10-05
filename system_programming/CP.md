@@ -45,7 +45,7 @@ Thread와 process의 공통점과 차이점은 다음과 같음
 - 공통점
     - 고유한 logical control flow를 가짐
     - concurrently하게 실행가능
-    - kernal에 의해 context switched
+    - kernel에 의해 context switched
 - 차이점
     - Thread는 code와 data를 공유하고, process는 (보통) 그러지 않음
     - 위의 이유로 thread는 process보다 less expensive
