@@ -7,7 +7,7 @@ Process는 각 프로그램에게 다음의 두 가지 추상화를 제공함
 - Private virtual adress space
     - 각 프로그램이 main memory를 독점적으로 사용하는 것처럼 보임
 ### Process States
-Process states에는 6종류가 있음
+Process states에는 5종류가 있음
 - **new**: process가 생성됨
 - **running**: Instruction이 실행중
 - **waiting**: process가 어떤 event가 발생하기를 기다림

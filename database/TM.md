@@ -114,7 +114,7 @@ Recovery 알고리즘
     - T의 마지막 statement가 끝날 때: \<T commit>
     - T가 roll back하고 끝날 때: \<T abort>
 - Undo(T): T의 마지막 log record로부터 돌아가며 old value로 update
-- Redo(T): T의 처음 log record부터 시작해서 old value로 update
+- Redo(T): T의 처음 log record부터 시작해서 new value로 update
 - Checkpoint
     - Log를 처음부터 끝까지 searching하는것은 비효율적이기에 도입됨
     - 현재 main memory에 있는 모든 log record를 stable storage에 output하고
