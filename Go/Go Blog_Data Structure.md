@@ -22,7 +22,7 @@
 - 슬라이싱이 가능하다.
 
 ### Slice internals
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Slice%20Struct.PNG" width="600" height="300"/>  
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Slice%20Struct.png" width="600" height="200"/>  
 
 - 슬라이스는 배열에 대한 포인터, length, capacity를 가지고 있는 array에 대한 descriptor이다.
     - length는 slice에 의해 참조된 원소의 수이다.
