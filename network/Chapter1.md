@@ -82,3 +82,15 @@
             - OSI 모델의 전송 계층과 유사
         - 4: 응용 계층
             - OSI 모델의 세션+표현+응용 계층과 유사
+### 캡슐화와 역캡슐화
+캡슐화
+- 계층 별 프로토콜의 목적과 특징에 부합하는 헤더(+트레일러) 추가  
+- 상위 계층의 패킷은 하위 계층의 페이로드로 간주  
+
+역캡슐화
+- 계층 별 프로토콜의 목적과 특징에 부합하는 헤더 제거
+
+PDU (Protocol Data Unit)
+- 각 계층에서 송수신되는 메세지의 단위
+
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Capsulation.PNG" width="600" height="300"/> 
