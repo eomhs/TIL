@@ -93,4 +93,4 @@
 PDU (Protocol Data Unit)
 - 각 계층에서 송수신되는 메세지의 단위
 
-<img src = "https://github.com/eomhs/TIL/blob/main/figures/Capsulation.PNG" width="600" height="300"/> 
+<img src = "https://github.com/eomhs/TIL/blob/main/figures/Capsulation.png" width="600" height="300"/> 
