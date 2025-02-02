@@ -17,9 +17,8 @@
 - [Query Processing](https://github.com/eomhs/TIL/blob/main/database/QP.md)
 - [Transaction Management](https://github.com/eomhs/TIL/blob/main/database/TM.md)
 ## 네트워크
-- OSI
-- TCP, UDP
-- Application Protocols
+- [개요](https://github.com/eomhs/TIL/blob/main/network/Chapter1.md)
+- [물리 계층과 데이터 링크 계층](https://github.com/eomhs/TIL/blob/main/network/Chapter2.md)
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
