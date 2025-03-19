@@ -118,3 +118,13 @@
 - URN의 장점
     - 자원에 고유한 이름을 붙이는 이름 기반 식별자라 자원의 위치와 무관하게 자원을 식별
 - URN은 아직 URL만큼 널리 채택된 방식은 아님
+### 네임 서버는 무엇을 저장할까
+- DNS 자원 레코드(DNS resource record)
+    - 이름(호스트 이름, Record Name)
+    - 값(Value)
+    - TTL
+    - 레코드 유형(Record Type)
+        - 레코드 유형이 달라지면 레코드 이름과 값의 의미가 달라짐
+- DNS 레코드 예제
+    - 타입: A, 이름: example.com, 값: 1.2.3.4, TTL: 300
+    - 타입: CNAMe, 이름: www.example.com, 값: example.com, TTL: 300
