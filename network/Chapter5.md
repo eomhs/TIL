@@ -272,4 +272,73 @@
     - 이전까지의 HTTP 버전: TCP 기반 동작
     - HTTP/3.0: UDP 기반 프로토콜인 QUIC(Quick UDP Internet Connections) 기만으로 동작
     - UDP가 비연결형 프로토콜이라 빠른 송수신 가능
+## HTTP 헤더와 HTTP 기반 기술
+- HTTP 헤더
+    - 필드 이름(헤더 이름)과 필드 값(헤더 값)이 콜론(:)을 기준으로 구분
+    - 헤더 유형
+        - 특별한 사전 지식이 필요하지 않은 헤더
+        - 사전 지식이 필요한 헤더 예) 캐시, 쿠키, 콘텐츠 협상 관련 헤더
+### HTTP 헤더
+- HTTP 요청 시 주로 사용되는 헤더
+- HTTP 응답 시 주로 사용되는 헤더
+- HTTP 요청과 응답 모두에서 자주 활용되는 헤더
+### HTTP 요청 시 주로 사용되는 헤더
+- Host
+    - 요청을 보낼 호스트를 나타내는 헤더
+    - 주로 도메인 네임 명시, 포트 번호가 포함되어 있을 수 있음
+- User-Agent
+    - 유저 에이전트(user agent): HTTP 요청을 시작하는 클라이언트 측의 프로그램(예: 웹 브라우저)
+    - User-Agent 헤더: 요청 메시지 생성에 관여한 클라이언트 프로그램과 관려된 다양한 정보가 명시
+- Referer
+    - 클라이언트가 요청을 보낼 때 머무르고 있던 URL이 명시
+    - 클라이언트의 유입 경로를 파악
+- Authorization
+    - 클라이언트의 인증 정보를 담는 헤더
+    - 인증 타입(type)과 인증을 위한 정보(credentials) 명시
+        - Authorization: \<type> \<credentials>
+    - 인증 타입에 따라 인증 정보에 명시될 값이 달라짐
+    - 가장 기본적인 HTTP 인증 타입은 Basic
+        - username:password를 Base64 인코딩한 값을 인증 정보로 삼는 방식
+### HTTP 응답 시 주로 사용되는 헤더
+- Server
+    - 요청을 처리하는 서버 측의 소프트웨어와 관련된 정보를 명시
+    - 예) Unix 운영체제에서 동작하는 아파치 HTTP 서버를 의미하는 헤더
+        - Server: Apache/2.4.1 (Unix)
+- Allow
+    - Allow 헤더는 클라이언트에게 허용된 HTTP 메서드 목록을 알려 주기 위해 사용
+    - 상태 코드 405(Method Not Allowed)를 응답하는 메시지에서 Allow 헤더가 함께 사용
+- Retry-After
+    - 상태 코드 503(Service Unavailable)과 함께 사용될 수 있는 헤더
+    - 자원을 사용할 수 있는 날짜 혹은 시각을 나타냄
+    - ex) `Retry-After: Fri, 23 Aug 2024 09:00:00 GMT`, `Retry-After: 120`
+- Location
+    - 클라이언트에게 자원의 위치를 알려 주기 위해 사용되는 헤더
+    - 주로 리다이렉션이 발생했을 때나 새로운 자원이 생성되었을 때 사용
+- WWW-Authenticate
+    - 상태 코드 401(Unauthorized)과 함께 사용되는 헤더
+    - 자원에 접근하기 위한 인증 방식을 설명
+    - ex) WWW-Authenticate: Basic
+### 요청과 응답 모두에서 활용되는 HTTP 헤더
+- Date
+    - 메시지가 생성된 날짜와 시각에 관련된 정보를 담은 헤더
+    - ex) `Date: Tue, 15 Nov 1994 08:12:31 GMT`
+- Connection
+    - 클라이언트의 요청과 응답 간의 연결 방식을 설정하는 헤더
+    - 지속 연결이 Connection에 명시되는 대표적인 연결 방식
+    - 가장 대표적으로 사용되는 값은 keep-alive와 close
+    - ex) `Connection: keep-alive`, `Connection: close`
+- Content-Length
+    - 본문의 바이트 단위 크기
+    - ex) `Content-Length: 100`
+- Content-Type, Content-Language, Content-Encoding
+    - 메시지 본문의 표현 방식을 설명하는 헤더
+    - 표현 헤더(representation header)의 일종
+    - Content-Type 헤더
+        - 메시지 본문에서 사용된 미디어 타입
+    - Content-Language 헤더
+        - 메시지 본문에 사용된 자연어를 명시
+        - 언어 태그로 명시: 하이픈(-)으로 구분된 구조
+            - 일반적으로 첫 번째 서브 태그 = 언어 코드, 두 번째 서브 태그 = 국가 코드
+    - Content-Encoding 헤더
+        - 메시지 본문을 압축하거나 변환한 방식
         
