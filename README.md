@@ -23,6 +23,8 @@
 - [전송 계층](https://github.com/eomhs/TIL/blob/main/network/Chapter4.md)
 - [응용 계층](https://github.com/eomhs/TIL/blob/main/network/Chapter5.md)
 - [네트워크 심화](https://github.com/eomhs/TIL/blob/main/network/Chapter7.md)
+## AWS
+- [Architecting on AWS](https://github.com/eomhs/TIL/blob/main/aws/AOA.md)
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
