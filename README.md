@@ -36,6 +36,8 @@
 - [Kotlin](https://github.com/eomhs/TIL/blob/main/language/Kotlin.md)
 ## Go
 - [Go Blog 자료구조 관련](https://github.com/eomhs/TIL/blob/main/Go/Go%20Blog_Data%20Structure.md)
+## Python
+- [패키징](https://github.com/eomhs/TIL/blob/main/python/package.md)
 ## 단축키
 - [일반적인 단축키](https://github.com/eomhs/TIL/blob/main/keyboard_shortcut/General.md)
 - [VSCode 단축키](https://github.com/eomhs/TIL/blob/main/keyboard_shortcut/VSCode.md)
