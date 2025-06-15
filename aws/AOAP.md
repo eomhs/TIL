@@ -63,3 +63,40 @@
 5. Aurora DB 장애 조치 적용
     - read replica가 있을 때
     - primary instance를 누르고 Actions -> Failover
+
+## 서버리스 아키텍처 구축
+1. SNS topic 생성
+    - type 선택, name 입력
+2. SQS 생성
+    - type 선택, name 입력
+    - 위에서 만든 SNS subscript
+    - SNS Publish message 버튼으로 잘 구독했는지 확인 가능
+3. S3 이벤트 알림 생성
+    - SNS에서 S3 특정 버킷 허용하게 policy 수정
+    - S3에서 버킷 선택 -> Properties -> Event Notification에서 이벤트 알림 생성
+4. Lambda 함수 생성
+    - name, runtime, role 선택
+    - add trigger
+    - runtime setting의 Handler를 통해 실행될 함수 선택 가능
+
+## Amazon S3 오리진으로 Amazon CloudFront 배포 구성
+1. Cloudfront
+    - General: distributed domain name, arn 등이 있음
+    - Origins: 오리진에 대한 세부 정보
+    - Behaviors: 캐시 등 설정
+    - Error page, Invalidations, Tags
+2. S3 버킷 생성
+    - name 입력
+    - Permissions -> Bucket policy에서 생성한 버킷에 cloudfront만 s3:GetObject등 할 수 있게 설정
+3. Cloudfront create origin
+    - Origin domain 선택
+    - name 입력
+    - Origin access control settings
+        - Create new OAC
+4. Cloudfron create behavior
+    - path pattern 설정
+    - origin과 origin group 선택
+5. 결과 확인
+    - S3의 object url로 접근하면 에러로 막힘
+    - cloudfront의 domain + 위에서 설정한 /path로 접근하면 접근 가능(캐싱도 적용)
+    
