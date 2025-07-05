@@ -23,8 +23,11 @@
 - [전송 계층](https://github.com/eomhs/TIL/blob/main/network/Chapter4.md)
 - [응용 계층](https://github.com/eomhs/TIL/blob/main/network/Chapter5.md)
 - [네트워크 심화](https://github.com/eomhs/TIL/blob/main/network/Chapter7.md)
+## 모니터링
+- [OpenTelemetry](https://github.com/eomhs/TIL/blob/main/observability/OTEL.md)
 ## AWS
 - [Architecting on AWS](https://github.com/eomhs/TIL/blob/main/aws/AOA.md)
+- [Architecting on AWS 실습](https://github.com/eomhs/TIL/blob/main/aws/AOAP.md)
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
@@ -41,7 +44,7 @@
 ## 단축키
 - [일반적인 단축키](https://github.com/eomhs/TIL/blob/main/keyboard_shortcut/General.md)
 - [VSCode 단축키](https://github.com/eomhs/TIL/blob/main/keyboard_shortcut/VSCode.md)
-- LINUX 단축키
+- (Neo)Vim 단축키
 ## 도서
 - [개발자 상식](https://github.com/eomhs/TIL/blob/main/%EB%8F%84%EC%84%9C/%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%83%81%EC%8B%9D.md)
 - [Clean Code](https://github.com/eomhs/TIL/blob/main/%EB%8F%84%EC%84%9C/Clean%20Code.md)
