@@ -40,3 +40,10 @@
 - API: tracing, metrics, log 를 생성하고 연관시키기 위해 데이터 타입과 operation을 정의 
 - SDK: API 구현을 위해 language-specific한 설정, 데이터 처리, exporting concept 등 요구사항들을 정의 
 - Data: OLTP와 vendor에 상관 없는 semantic convention을 정의 
+### Collector
+- OTEL Collector는 vendor-agnostic한 프록시로 telemetry data를 수집, 처리, 내보냄
+### Language-specific API & SDK implementations
+- Instrumentation libraries
+- Exporters
+    - telemetry data를 Collector에게 전달
+    - telemetry를 시각화하기 위해서는 backend(Jaeger, Zipkin, Prometheus 등) 에 export
