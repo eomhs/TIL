@@ -47,3 +47,11 @@
 - Exporters
     - telemetry data를 Collector에게 전달
     - telemetry를 시각화하기 위해서는 backend(Jaeger, Zipkin, Prometheus 등) 에 export
+- Zero-Code instrumentation
+- Resource detectors
+    - OTEL_RESOURCE_ATTRIBUTES 라는 환경변수를 통해 제공함
+- Cross-service propagators
+    - propagation이란 data를 서비스나 프로세스간 전파하는 메카니즘
+    - 대부분 instrumental libraries에 의해 일어나지만 propagator를 커스텀하게 사용할 수도 있음
+- Samplers
+    - Sampling이란 시스템에 의해 생성되는 traces의 양을 제한하는 것
