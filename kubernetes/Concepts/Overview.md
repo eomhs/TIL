@@ -26,4 +26,12 @@ yaml이나 json으로 설정 파일을 만들어서 그 파일로 object를 생�
 원하는 상태를 yaml로 만들고 적용      
 `kubectl apply`의 형태
 
+# Object Names and IDs
+cluster의 각 object에는 resource별 고유한 이름과 UID가 있음  
+예를 들어 myapp-1234 인 Pod는 하나만 존재 가능하지만, Pod와 Deployment의 이름이 같을 수는 있음
+## Names
+`/api/v1/pods/some-name`처럼 resource URL을 지칭하는 client가 제공한 문자열  
+API resource는 API group, resource type, namespace, name으로 구분되기 때문에, API version에 상관없이 name은 고유해야 함  
+### DNS Subdomain Names
+
 
