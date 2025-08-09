@@ -81,3 +81,50 @@ partition
 - partition이라는 key가 없는 경우
 
 똑같이 comma separator로 logical AND를 수행할 수 있고 이는 Equality-based requirement와 혼합해서 쓸 수 있음
+
+# Namespaces
+kubernetes에서 namespace는 하나의 cluster 안에서 resource들의 group을 분리할 수 있게 해줌  
+resource의 name은 namespace 안에서만 고유하면 됨  
+namespace 기반의 범위는 StorageClass, Nodes 등의 cluster 범위의 object들에 대해서는 적용 불가능
+## When to Use Multiple Namespaces
+namespace는 여러 팀이나 프로젝트에서 많은 유저들이 사용하는 환경에서 사용되는 것이 의도됨(많아야 수십명정도의 유저가 있는 경우에는 고려하지 않아도 됨)  
+namespace는 중첩될 수 없고, resource는 하나의 namespace에만 속함  
+## Initial namespaces
+kubernetes는 네 개의 초기 namespace가 있음
+- default
+    - namespace를 생성하지 않고도 새로운 cluster를 만들 수 있게 포함됨
+    - 다만 production 환경에서는 사용하지 않는 것이 권장됨
+- kube-node-lease
+    - 각 node에 연관된 lease object를 가지고 있음
+    - Node lease는 kubelet이 heartbeat를 보내서 control plane이 node failure를 감지할 수 있게 해줌
+- kube-public
+    - 이 namespace는 인증되지 않았어도 모든 client가 읽을 수 있음
+    - 전체 클러스터 중에서 공개적으로 드러나서 읽을 수 있는 resource들을 위해 예약되어 있음
+    - 이 namespace가 public인 건 convention이지 필수는 아님
+- kube-system
+    - kubernetes에 의해 생성된 object들을 위한 namespace
+## Working with Namespaces
+### Viewing namespaces 
+다음 명령어로 현재 namespace들 조회  
+`kubectl get namespace`
+### Setting the namespace for a request
+--namespace flag로 request에 대한 namespace를 지정할 수 있음
+```
+kubectl run nginx --image=nginx --namespace=<insert-namespace-name-here>
+kubectl get pods --namespace=<insert-namespace-name-here>
+```
+### Setting the namespace preference 
+이후의 kubectl command에 대한 영구적인 namespace를 설정할 수도 있음  
+```
+kubectl config set-context --current --namespace=<insert-namespace-name-here>
+# Validate it
+kubectl config view --minify | grep namespace:
+```
+## Namespace and DNS
+Service를 생성하면, 이에 대응되는 DNS Entry가 생성됨  
+이 entry는 `<service-name>.<namespace-name>.svc.cluster.local`와 같은 형식이고, 이는 service-name만 사용하는 컨테이너에서 namespace의 local인 service로 resolve 됨  
+이는 dev, stage, prod 등의 여러 namespace가 같은 설정을 쓰는 경우 유용함
+## Not all objects are in a namespace
+대부분의 resource는 namespace에 속하지만, nodes 등 그렇지 않은 경우도 있음  
+## Automatic labelling 
+kubernetes control plane은 모든 namespace에 대해 `kubernetes.io/metadata.name` 라는 label key를 달고, value는 namespace name임
