@@ -128,3 +128,10 @@ Service를 생성하면, 이에 대응되는 DNS Entry가 생성됨
 대부분의 resource는 namespace에 속하지만, nodes 등 그렇지 않은 경우도 있음  
 ## Automatic labelling 
 kubernetes control plane은 모든 namespace에 대해 `kubernetes.io/metadata.name` 라는 label key를 달고, value는 namespace name임
+
+# Annotations
+label과 비슷한 방식으로, object에 metadata를 붙일 수 있음
+## Attaching metadata to objects
+label과 다른 점은 annotation은 object를 식별하거나 선택하는 데 사용되지 않음  
+## Syntax and character set 
+label과 같음(key name + optional prefix)
