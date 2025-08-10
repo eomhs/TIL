@@ -135,3 +135,14 @@ label과 비슷한 방식으로, object에 metadata를 붙일 수 있음
 label과 다른 점은 annotation은 object를 식별하거나 선택하는 데 사용되지 않음  
 ## Syntax and character set 
 label과 같음(key name + optional prefix)
+
+# Field Selectors
+field selector는 다음처럼 resource의 하나 이상의 field의 value로 kubernetes object를 선택할 수 있게 함  
+`metadata.namespace!=default`   
+`kubectl get pods --field-selector status.phase=Running`  
+## Supported fields
+[링크](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/#list-of-supported-fields) 참조
+## Custom resources fields 
+모든 custom resource type은 `metadata.name` and `metadata.namespace` 필드를 가짐
+## Supported operators
+label selector와 같음, comma-separated로 여러 개 가능, 여러 resource type 한번에 select도 가능
