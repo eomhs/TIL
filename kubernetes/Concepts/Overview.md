@@ -146,3 +146,22 @@ field selector는 다음처럼 resource의 하나 이상의 field의 value로 ku
 모든 custom resource type은 `metadata.name` and `metadata.namespace` 필드를 가짐
 ## Supported operators
 label selector와 같음, comma-separated로 여러 개 가능, 여러 resource type 한번에 select도 가능
+
+# Finalizers
+finalizer는 특정 조건을 만족하기 전까지 resources를 지우지 않게 하는, namespace에 속한 key임   
+controller에게 deleted object가 가졌던 resources들을 정리하라고 알림  
+finalizer를 가진 특정 object를 삭제하라고 API를 쏘면 일단 `.metadata.deletionTimestamp`가 object에 생기고, terminating state로 바뀜. 이후에 finalizer에 명세된 행동을 끝낸 뒤 해당 finalizer를 지우고, 이렇게 모든 finalizer를 지워 `metadata.finalizers`가 없어지면 이제 완전히 지움  
+## How finalizers work
+manifest file을 이용해 resource를 생성할 때 `metadata.finalizers`에 명세할 수 있음  
+finalizer를 가진 특정 object를 삭제하라고 API를 쏘면 object에 `.metadata.deletionTimestamp`가 생기고 terminating state로 바뀜  
+이후에 controller가 finalizer에 명세된 일들을 하기 시작하고, 하나 끝낼때마다 해당 finalizer을 지움  
+모든 finalizer가 지워지면 deletionTimestamp가 있는 object는 자동으로 지워짐
+## Owner references, labels, and finalizers
+Job이 하나 이상의 Pods를 만들 때, Job controller는 tracking 하기 쉽게 같이 만들어진 Pods에 label을 추가함  
+또한 Job controller는 Pods에, 그 Pods를 생성한 Job을 owner reference로 추가함  
+만약 이 Job을 Pods가 실행 중일 때 지우면, 이 owner reference를 이용해 어떤 Pods를 cleanup 해야할지 추적함  
+이 때 finalizer도 같이 처리함  
+따라서 finalizer가 자신이 처리되기 전까지 owner reference cleanup을 막을 수도 있음
+
+
+
