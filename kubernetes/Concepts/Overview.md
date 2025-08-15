@@ -163,5 +163,17 @@ Job이 하나 이상의 Pods를 만들 때, Job controller는 tracking 하기 �
 이 때 finalizer도 같이 처리함  
 따라서 finalizer가 자신이 처리되기 전까지 owner reference cleanup을 막을 수도 있음
 
+# Owners and Dependents
+kubernetes에서, 어떤 object는 다른 object의 owner임  
+예를 들어, ReplicaSet은 Pods set들의 owner임  
+## Owner references in object specifications 
+dependent object에는 `metadata.ownerReferences` 필드에 owner object reference가 있음  
+reference는 같은 namespace에 있는 object의 이름과 UID로 구성됨  
+kubernetes는 ReplicaSets, DaemonSets, Deployments, Jobs and CronJobs, and ReplicationControllers 같은 objects에 의해 생성된 objects들에 있는 이 필드의 value를 자동으로 채움  
+dependent object에는 또한 `ownerReferences.blockOwnerDeletion` boolean 필드가 있는데, 이게 true이면 이 객체가 먼저 지워지기 전에 owner가 지워지는 것을 막음  
+## Ownership and finalizers 
+foreground deletion에서, kubernetes는 owner object에 `foreground` finalizer를 달아서 controller가 `ownerReferences.blockOwnerDeletion=true`인 모든 dependent object를 먼저 지워야 지울 수 있게 함  
+orphan cascading deletion에서, kubernetes는 `orphan` finalizer를 달아서 owner object가 지워지면 dependent objects에서 `ownerReferences`를 지움
+
 
 
