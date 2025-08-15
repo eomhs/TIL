@@ -175,5 +175,5 @@ dependent object에는 또한 `ownerReferences.blockOwnerDeletion` boolean 필�
 foreground deletion에서, kubernetes는 owner object에 `foreground` finalizer를 달아서 controller가 `ownerReferences.blockOwnerDeletion=true`인 모든 dependent object를 먼저 지워야 지울 수 있게 함  
 orphan cascading deletion에서, kubernetes는 `orphan` finalizer를 달아서 owner object가 지워지면 dependent objects에서 `ownerReferences`를 지움
 
-
-
+# Recommended Labels
+[링크](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/) 참조
