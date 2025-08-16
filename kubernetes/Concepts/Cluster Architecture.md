@@ -39,5 +39,15 @@ node는 다음의 두 가지 방식으로 heartbeat를 보내 cluster가 각 nod
 - node의 .status를 업데이트
 - `kube-node-lease` 네임스페이스 내의 Lease object
 ## Node controller
-node controller는 control plane component로 node의 이것저것을 관리함
+node controller는 control plane component로 node에 대해 다음의 다양한 부분을 관리함
+- node가 등록되면 CIDR block을 할당함
+- 클라우드 환경일 경우 내부 node list를 cloud provider의 가용 machine list와 동기화함
+- node의 health를 모니터링
+    - node가 unreachable이면 .status의 `Ready`를 `Unknown`으로 변경
+    - `Unknown` 상태에서 5분이 지나면 해당 node의 모든 pods에 대해 API를 이용한 제거를 트리거함
+
+기본적으로 node controller는 각 node의 state를 5초마다 체크함(주기는 flag로 변경 가능)
+### Rate limits on eviction
+대부분의 경우, node controller는 `--node-eviction-rate` (default 0.1)을 이용해 초당 eviction의 상한을 정함  
+default 0.1의 경우 10초에 최대 1개의 node에 있는 pods에 대해서만 eviction
 
