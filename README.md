@@ -28,6 +28,8 @@
 ## AWS
 - [Architecting on AWS](https://github.com/eomhs/TIL/blob/main/aws/AOA.md)
 - [Architecting on AWS 실습](https://github.com/eomhs/TIL/blob/main/aws/AOAP.md)
+- [Running Containers on Amazon Elastic Kubernetes Service](https://github.com/eomhs/TIL/blob/main/aws/EKS.md)
+- [Running Containers on Amazon Elastic Kubernetes Service 실습](https://github.com/eomhs/TIL/blob/main/aws/EKSP.md)
 ## UNIX, LINUX, GNU 툴체인
 - [UNIX 역사와 철학](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/UNIX.md)
 - [LINUX Kernel](https://github.com/eomhs/TIL/blob/main/unix_linux_gnu/Linux%20Kernel.md)
