@@ -39,4 +39,32 @@
         - livenessProbe: 애플리케이션이 살아있는지 확인. 교착 또는 경합 상태면 컨테이너를 다시 띄울 수 있음
         - readinessProbe: 서비스가 트래픽을 줘도 되는지 확인
         - kubernetes 프로브는 http, ext, TCP를 지원
-4. 
+## Helm 및 Amazon S3를 사용하여 애플리케이션 배포
+1. Helm, Helm-S3 플러그인 설치
+    - `curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash`
+    - `helm plugin install https://github.com/hypnoglow/helm-s3.git`
+2. Helm S3 리포지토리 설정
+    - `helm s3 init s3://<S3_BUCKET_NAME>` 
+    - 차트 정보를 트래킹하기 위해 버킷에 index.yaml 파일이 생성됨
+3. 버킷을 Helm 클라이언트용 차트 리포지토리로 추가
+    - `helm repo add <name> s3://<S3_BUCKET_NAME>`
+    - helm repo add는 index.yaml을 가져와 /home/ssm-user/.cache/helm/repository 디렉토리에 저장
+4. Helm chart 디렉토리 생성
+    - 디렉토리 이름은 차트 이름
+    - Chart.yaml: 차트에 대한 정보가 들어있음
+    - security/: Pod security group에 대한 manifest
+    - templates/: values와 결합하면 유효한 manifest를 만들어내는 템플릿
+    - values.yaml: 사용할 values가 정의되어 있는 파일
+5. Helm chart 패키징 및 S3에 푸시
+    - `helm package helm-chart/`
+    - `helm s3 push <path-to-chart-tgz> <name>`
+6. Helm chart 검색 및 설치
+    - `helm search repo`
+    - `helm install <name> s3://<S3_BUCKET_NAME>/<chart-tgz> --version <version> --dry-run --debug`
+        - --dry-run: 차트 설치 테스트용
+        - --debug: 설치 프로세스에 대한 자세한 디버깅 정보 제공
+7. Helm chart 편집 및 재배포
+    - values.yaml 편집
+    - `helm upgrade <name> <path-to-chart-dir>`
+8. 변경사항 롤백
+    - `helm rollback <name> <rollback-version>`
