@@ -93,7 +93,7 @@
     - name 입력
     - Origin access control settings
         - Create new OAC
-4. Cloudfron create behavior
+4. Cloudfront create behavior
     - path pattern 설정
     - origin과 origin group 선택
 5. 결과 확인
